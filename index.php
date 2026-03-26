@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#155dfd',
+                        secondary: '#0b1a33',
+                        dark: '#1a1a1a',
+                        light: '#f8f9fa'
+                    }
+                }
+            }
+        }
+    </script>
+   
+</head>
+<body class="bg-dark min-h-screen">
+    <!-- Main Dashboard Container -->
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <nav class="w-64 bg-secondary flex-shrink-0">
+            <div class="h-full flex flex-col">
+                <!-- Logo -->
+                    <div class="flex items-center gap-4 p-6 border-b border-slate-700">
+                        <div class="bg-primary rounded-lg flex items-center justify-center w-10 h-10">
+                            <span class="text-white font-bold text-lg">A</span>
+                        </div>
+                        <h1 class="text-white text-xl font-bold">Admin</h1>
+                    </div>
+
+                <!-- Navigation -->
+                <ul class="flex-1 px-3 py-2">
+                    <li class="mb-1">
+                        <a class="flex items-center px-3 py-2 text-white rounded-lg hover:bg-primary transition-colors bg-primary" href="#" data-tab="orders">
+                            <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z"></path>
+                            </svg>
+                            Orders
+                        </a>
+                    </li>
+                    <li class="mb-1">
+                        <a class="flex items-center px-3 py-2 text-white rounded-lg hover:bg-primary transition-colors" href="#" data-tab="customers">
+                            <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"></path>
+                            </svg>
+                            Customers
+                        </a>
+                    </li>
+                    <li class="mb-1">
+                        <a class="flex items-center px-3 py-2 text-white rounded-lg hover:bg-primary transition-colors" href="#" data-tab="students">
+                            <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path>
+                            </svg>
+                            Students
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- User Info -->
+                <div class="border-t border-gray-900 pt-3">
+                    <div class="px-3 mb-2">
+                        <p class="text-gray-400 text-xs">Logged in as</p>
+                        <p class="text-gray-400 text-sm">demo@example.com</p>
+                    </div>
+                    <div class="px-3">
+                        <a href="#" class="flex items-center px-3 py-2 text-white rounded-lg hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
+                            </svg>
+                            Settings
+                        </a>
+                        <a href="auth/logout.php" class="flex items-center px-3 py-2 text-red-400 rounded-lg hover:bg-gray-700 transition-colors">
+                            <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"></path>
+                            </svg>
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="flex-1 bg-dark overflow-auto">
+            <!-- Orders Tab -->
+            <div id="orders-tab" class="tab-content active h-full">
+                <?php include 'components/orders/index.php'; ?>
+            </div>
+
+            <!-- Customers Tab -->
+            <div id="customers-tab" class="tab-content hidden h-full">
+                <?php include 'components/customers/index.php'; ?>
+            </div>
+
+            <!-- Students Tab -->
+            <div id="students-tab" class="tab-content hidden h-full">
+                <?php include 'components/students/index.php'; ?>
+            </div>
+
+            <!-- Modals -->
+            <?php include 'components/modals.php'; ?>
+        </main>
+    </div>
+ <script src="assets/js/dashboard.js"></script>
+</body>
+</html>
