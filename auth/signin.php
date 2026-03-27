@@ -74,17 +74,6 @@
                         </a>
                     </div>
                 </div>
-
-                <!-- Demo Credentials -->
-                <div class="text-center mt-6">
-                    <p class="text-gray-400 text-sm mb-2">Demo Credentials:</p>
-                    <div class="bg-gray-800 bg-opacity-50 p-3 rounded-lg border border-gray-700">
-                        <div class="font-mono text-sm text-gray-300 leading-relaxed">
-                            Email: <span class="text-blue-400">demo@example.com</span><br>
-                            Password: <span class="text-blue-400">demo123</span>
-                        </div>
-                    </div>
-                </div>
     </div>
 </body>
 </html>

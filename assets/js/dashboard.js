@@ -86,6 +86,120 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Functions to handle update and delete modals
+function viewDetailOrder(orderId) {
+  console.log("viewDetailOrder called with orderId:", orderId);
+
+  // Get order data from the table row
+  const row = document.querySelector(`tr[data-order-id="${orderId}"]`);
+  if (!row) return;
+
+  const cells = row.querySelectorAll("td");
+  const orderInfo = cells[0].textContent;
+  const customerName = cells[1].textContent;
+  const amount = cells[3].textContent.replace("$", "");
+  const items = cells[4].textContent;
+
+  // Populate the view modal
+  document.getElementById("viewOrderId").textContent = orderInfo;
+  document.getElementById("viewOrderCustomer").textContent = customerName;
+
+  // Generate sample items based on the number of items
+  const itemsData = generateSampleItems(parseInt(items), parseFloat(amount));
+  const itemsContainer = document.getElementById("viewOrderItems");
+  itemsContainer.innerHTML = "";
+
+  itemsData.forEach((item) => {
+    const itemDiv = document.createElement("div");
+    itemDiv.className = "bg-gray-900 rounded-lg p-3 border border-gray-700";
+    itemDiv.innerHTML = `
+      <div class="flex justify-between items-start">
+        <div class="flex-1">
+          <p class="text-white font-medium">${item.name}</p>
+          <p class="text-gray-400 text-sm">${item.quantity} x $${item.price.toFixed(2)}</p>
+        </div>
+        <div class="text-right">
+          <p class="text-white font-semibold">$${item.total.toFixed(2)}</p>
+        </div>
+      </div>
+    `;
+    itemsContainer.appendChild(itemDiv);
+  });
+
+  // Display total
+  document.getElementById("viewOrderTotal").textContent =
+    `$${parseFloat(amount).toFixed(2)}`;
+
+  openModal("viewOrderDetailsModal");
+}
+
+function generateSampleItems(itemCount, totalAmount) {
+  const items = [];
+  const products = [
+    { name: "Laptop Pro", description: "High-performance laptop" },
+    { name: "Wireless Mouse", description: "Ergonomic wireless mouse" },
+    { name: "USB-C Hub", description: "Multi-port USB hub" },
+    { name: "Mechanical Keyboard", description: "RGB mechanical keyboard" },
+    { name: "Monitor Stand", description: "Adjustable monitor stand" },
+    { name: "Webcam HD", description: "1080p HD webcam" },
+    { name: "Desk Lamp", description: "LED desk lamp" },
+    { name: "Headphones", description: "Noise-cancelling headphones" },
+  ];
+
+  const avgPrice = totalAmount / itemCount;
+
+  for (let i = 0; i < itemCount; i++) {
+    const product = products[i % products.length];
+    const quantity = Math.floor(Math.random() * 2) + 1;
+    const price = avgPrice * (0.8 + Math.random() * 0.4);
+
+    items.push({
+      name: product.name,
+      description: product.description,
+      quantity: quantity,
+      price: price,
+      total: price * quantity,
+    });
+  }
+
+  return items;
+}
+
+function printOrderDetails() {
+  const modalContent = document.querySelector(
+    "#viewOrderDetailsModal .bg-gray-800",
+  );
+  const printWindow = window.open("", "_blank");
+
+  printWindow.document.write(`
+    <html>
+      <head>
+        <title>Order Details</title>
+        <style>
+          body { font-family: Arial, sans-serif; margin: 20px; }
+          .header { border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 20px; }
+          .section { margin-bottom: 20px; }
+          .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+          .label { font-weight: bold; color: #666; }
+          table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+          th, td { padding: 10px; text-align: left; border-bottom: 1px solid #ddd; }
+          th { background-color: #f5f5f5; }
+          .text-right { text-align: right; }
+          .total { font-size: 18px; font-weight: bold; }
+        </style>
+      </head>
+      <body>
+        <div class="header">
+          <h1>Order Details</h1>
+        </div>
+        ${modalContent.innerHTML}
+      </body>
+    </html>
+  `);
+
+  printWindow.document.close();
+  printWindow.print();
+}
+
 function updateOrder(orderId) {
   // Get order data from the table row
   const row = document.querySelector(`tr[data-order-id="${orderId}"]`);
