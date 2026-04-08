@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    if(!isset($_COOKIE['email'])) {
+        header('Location: auth/signin.php');
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

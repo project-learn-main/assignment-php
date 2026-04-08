@@ -1,3 +1,31 @@
+<?php 
+session_start();
+
+$error = "";
+
+if (!isset($_SESSION['danhsachAdmin'])) {
+    $_SESSION['danhsachAdmin'] = [
+        ['admin@example.com', '123','Tony'],
+        ['user@example.com', 'user123','Roger'],
+        ['test@example.com', 'test123','Alice']
+    ];
+}
+    if(isset($_POST['email']) && isset($_POST['password'])) {
+        $email = $_POST['email'];
+        $password = $_POST['password'];    
+        foreach($_SESSION['danhsachAdmin'] as $index => $admin) {
+            if($admin[0] == $email && $admin[1] == $password) {
+                setcookie('email', $email, time() + 3600,"/");
+                header('Location: ../index.php');
+               break;
+            } else{
+                $error = "Sai email hoặc mật khẩu";
+                break;
+            }   
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,13 +59,16 @@
         <!-- Card -->
         <div class="bg-gray-800 bg-opacity-90 backdrop-blur-lg rounded-xl border border-gray-700 shadow-2xl">
             <div class="p-6">
-                            <!-- <div class="bg-red-900 bg-opacity-20 border border-red-800 text-red-300 rounded-lg p-3 mb-4 flex items-center animate-pulse">
-                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-                                </svg>
-                            </div> -->
+                            <?php if ($error): ?>
+                                <div class="bg-red-900 bg-opacity-20 border border-red-800 text-red-300 rounded-lg p-3 mb-4 flex items-center animate-pulse">
+                                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <div><?php echo htmlspecialchars($error); ?></div>
+                                </div>
+                            <?php endif; ?>
 
-                        <form method="POST" action="">
+                        <form method="POST">
                             <!-- Email Field -->
                             <div class="mb-4">
                                 <label for="email" class="block text-gray-300 font-medium mb-2">Email Address</label>

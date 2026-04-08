@@ -1,9 +1,8 @@
 <?php
 session_start();
-require_once '../config/auth.php';
 
-signOut();
+setcookie('email', '', time() - 3600, '/');
 
 header('Location: signin.php');
-exit;
+exit();
 ?>
