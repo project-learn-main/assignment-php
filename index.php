@@ -85,21 +85,21 @@
         <main class="flex-1 bg-dark overflow-auto">
             <!-- Orders Tab -->
             <div id="orders-tab" class="tab-content active h-full">
-                <?php include 'components/orders/index.php'; ?>
+                <?php include 'Element/orders/index.php'; ?>
             </div>
 
-            <!-- Customers Tab -->
+            <!-- Customers Tab -->      
             <div id="customers-tab" class="tab-content hidden h-full">
-                <?php include 'components/customers/index.php'; ?>
+                <?php include 'Element/customers/index.php'; ?>
             </div>
 
             <!-- Students Tab -->
             <div id="students-tab" class="tab-content hidden h-full">
-                <?php include 'components/students/index.php'; ?>
+                <?php include 'Element/students/index.php'; ?>
             </div>
 
             <!-- Modals -->
-            <?php include 'components/modals.php'; ?>
+            <?php include 'Element/modals.php'; ?>
         </main>
     </div>
  <script src="assets/js/dashboard.js"></script>

@@ -1,36 +1,36 @@
 <?php
-session_start();
-require_once '../config/database.php';
+if(isset($_POST['customer']) && isset($_POST['amount']) && isset($_POST['items'])
+    && isset($_POST['orderId']) && isset($_POST['orderDate']) 
+&& isset($_POST['status']) && isset($_POST['productId']) && isset($_POST['productName']) && isset($_POST['unitPrice']) && isset($_POST['quantity'])
+// && isset($_POST['productImage'])
+){
+    session_start();
+    $customer = $_POST['customer'];
+    $amount = $_POST['amount'];
+    $items = $_POST['items'];
+    $orderId = $_POST['orderId'];
+    $orderDate = $_POST['orderDate'];
+    $status = $_POST['status'];
+    $productId = $_POST['productId'];
+    $productName = $_POST['productName'];
+    $unitPrice = $_POST['unitPrice'];
+    $quantity = $_POST['quantity'];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $customer = $_POST['customer'] ?? '';
-    $amount = $_POST['amount'] ?? '';
-    $items = $_POST['items'] ?? '';
-    $status = $_POST['status'] ?? 'pending';
+    $_SESSION['order'][] = [
+        'customer' => $customer,
+        'amount' => $amount,
+        'items' => $items,
+        'orderId' => $orderId,
+        'orderDate' => $orderDate,
+        'status' => $status,
+        'productId' => $productId,
+        'productName' => $productName,
+        'unitPrice' => $unitPrice,
+        'quantity' => $quantity
+    ];
+    echo "Order added successfully";
     
-    if (!empty($customer) && !empty($amount) && !empty($items)) {
-        $orders = getOrders();
-        
-        $newOrder = [
-            'id' => (string)(count($orders) + 1),
-            'orderNumber' => '#ORD-' . str_pad(count($orders) + 1, 3, '0', STR_PAD_LEFT),
-            'customer' => $customer,
-            'amount' => $amount,
-            'items' => (int)$items,
-            'status' => $status,
-            'date' => date('Y-m-d'),
-            'createdAt' => date('Y-m-d')
-        ];
-        
-        $orders[] = $newOrder;
-        saveOrders($orders);
-        
-        $_SESSION['success'] = 'Order added successfully!';
-    } else {
-        $_SESSION['error'] = 'Please fill in all required fields.';
-    }
+    header('Location: ../index.php');
+    exit();
 }
 
-header('Location: ../index.php');
-exit;
-?>
