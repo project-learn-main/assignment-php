@@ -1,14 +1,9 @@
 <?php 
 session_start();
-
+$dataAdmin = require '../data/admis.php';
 $error = "";
-
 if (!isset($_SESSION['danhsachAdmin'])) {
-    $_SESSION['danhsachAdmin'] = [
-        ['admin@example.com', '123','Tony'],
-        ['user@example.com', 'user123','Roger'],
-        ['test@example.com', 'test123','Alice']
-    ];
+    $_SESSION['danhsachAdmin'] = $dataAdmin;
 }
     if(isset($_POST['email']) && isset($_POST['password'])) {
         $email = $_POST['email'];
@@ -16,6 +11,7 @@ if (!isset($_SESSION['danhsachAdmin'])) {
         foreach($_SESSION['danhsachAdmin'] as $index => $admin) {
             if($admin[0] == $email && $admin[1] == $password) {
                 setcookie('email', $email, time() + 3600,"/");
+                setcookie('name', $admin[2], time() + 3600,"/");
                 header('Location: ../index.php');
                break;
             } else{

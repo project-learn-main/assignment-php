@@ -36,9 +36,9 @@
                 <!-- Logo -->
                     <div class="flex items-center gap-4 p-6 border-b border-slate-700">
                         <div class="bg-primary rounded-lg flex items-center justify-center w-10 h-10">
-                            <span class="text-white font-bold text-lg">A</span>
+                            <span class="text-white font-bold text-lg"><?php echo $_COOKIE['name'][0]; ?></span>
                         </div>
-                        <h1 class="text-white text-xl font-bold">Admin</h1>
+                        <h1 class="text-white text-xl font-bold">Hello, <?php echo $_COOKIE['name']; ?></h1>
                     </div>
 
                 <!-- Navigation -->

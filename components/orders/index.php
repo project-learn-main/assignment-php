@@ -3,7 +3,8 @@
 <div class="bg-gray-800 px-6 py-8">
 <div class="flex justify-between items-center py-4">
     <h2 class="text-white text-2xl font-semibold">Orders</h2>
-    <button class="bg-primary hover:opacity-80 text-white px-4 py-2 rounded-lg transition-colors flex items-center" onclick="openModal('addOrderModal')">
+    <button class="bg-primary hover:opacity-80 text-white px-4 py-2 rounded-lg transition-colors flex items-center" 
+    onclick="openModal('addOrderModal')">
         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
         </svg>
@@ -64,9 +65,14 @@
                 <td class="py-3 px-6 font-semibold">$299.99</td>
                 <td class="py-3 px-6 text-center">3</td>
                 <td class="py-3 px-6">
-                    <span class="inline-block px-2 py-1 text-xs font-semibold text-white rounded-full bg-green-500">
-                        Delivered
-                    </span>
+                    <select class="px-2 py-1 text-xs font-semibold text-white rounded-full bg-green-500 border-0 focus:ring-2 focus:ring-blue-500" 
+                            onchange="updateOrderStatus('ORD-001', this.value)">
+                        <option value="pending" class="bg-gray-800">Pending</option>
+                        <option value="processing" class="bg-gray-800">Processing</option>
+                        <option value="shipped" class="bg-gray-800">Shipped</option>
+                        <option value="delivered" selected class="bg-gray-800">Delivered</option>
+                        <option value="cancelled" class="bg-gray-800">Cancelled</option>
+                    </select>
                 </td>
                 <td class="py-3 px-6">
                     <div class="flex justify-center gap-2">
@@ -96,9 +102,14 @@
                 <td class="py-3 px-6 font-semibold">$149.99</td>
                 <td class="py-3 px-6 text-center">2</td>
                 <td class="py-3 px-6">
-                    <span class="inline-block px-2 py-1 text-xs font-semibold text-white rounded-full bg-primary">
-                        Shipped
-                    </span>
+                    <select class="px-2 py-1 text-xs font-semibold text-white rounded-full bg-primary border-0 focus:ring-2 focus:ring-blue-500" 
+                            onchange="updateOrderStatus('ORD-002', this.value)">
+                        <option value="pending" class="bg-gray-800">Pending</option>
+                        <option value="processing" class="bg-gray-800">Processing</option>
+                        <option value="shipped" selected class="bg-gray-800">Shipped</option>
+                        <option value="delivered" class="bg-gray-800">Delivered</option>
+                        <option value="cancelled" class="bg-gray-800">Cancelled</option>
+                    </select>
                 </td>
                 <td class="py-3 px-4">
                     <div class="flex justify-center gap-2">
@@ -128,9 +139,14 @@
                 <td class="py-3 px-6 font-semibold">$459.99</td>
                 <td class="py-3 px-6 text-center">5</td>
                 <td class="py-3 px-6">
-                    <span class="inline-block px-2 py-1 text-xs font-semibold text-white rounded-full bg-yellow-500">
-                        Processing
-                    </span>
+                    <select class="px-2 py-1 text-xs font-semibold text-white rounded-full bg-yellow-500 border-0 focus:ring-2 focus:ring-blue-500" 
+                            onchange="updateOrderStatus('ORD-003', this.value)">
+                        <option value="pending" class="bg-gray-800">Pending</option>
+                        <option value="processing" selected class="bg-gray-800">Processing</option>
+                        <option value="shipped" class="bg-gray-800">Shipped</option>
+                        <option value="delivered" class="bg-gray-800">Delivered</option>
+                        <option value="cancelled" class="bg-gray-800">Cancelled</option>
+                    </select>
                 </td>
                 <td class="py-3 px-4">
                     <div class="flex justify-center gap-2">
@@ -160,9 +176,14 @@
                 <td class="py-3 px-6 font-semibold">$199.99</td>
                 <td class="py-3 px-6 text-center">1</td>
                 <td class="py-3 px-6">
-                    <span class="inline-block px-2 py-1 text-xs font-semibold text-white rounded-full bg-gray-500">
-                        Pending
-                    </span>
+                    <select class="px-2 py-1 text-xs font-semibold text-white rounded-full bg-gray-500 border-0 focus:ring-2 focus:ring-blue-500" 
+                            onchange="updateOrderStatus('ORD-004', this.value)">
+                        <option value="pending" selected class="bg-gray-800">Pending</option>
+                        <option value="processing" class="bg-gray-800">Processing</option>
+                        <option value="shipped" class="bg-gray-800">Shipped</option>
+                        <option value="delivered" class="bg-gray-800">Delivered</option>
+                        <option value="cancelled" class="bg-gray-800">Cancelled</option>
+                    </select>
                 </td>
                 <td class="py-3 px-4">
                     <div class="flex justify-center gap-2">
@@ -192,9 +213,14 @@
                 <td class="py-3 px-6 font-semibold">$349.99</td>
                 <td class="py-3 px-6 text-center">4</td>
                 <td class="py-3 px-6">
-                    <span class="inline-block px-2 py-1 text-xs font-semibold text-white rounded-full bg-green-500">
-                        Delivered
-                    </span>
+                    <select class="px-2 py-1 text-xs font-semibold text-white rounded-full bg-green-500 border-0 focus:ring-2 focus:ring-blue-500" 
+                            onchange="updateOrderStatus('ORD-005', this.value)">
+                        <option value="pending" class="bg-gray-800">Pending</option>
+                        <option value="processing" class="bg-gray-800">Processing</option>
+                        <option value="shipped" class="bg-gray-800">Shipped</option>
+                        <option value="delivered" selected class="bg-gray-800">Delivered</option>
+                        <option value="cancelled" class="bg-gray-800">Cancelled</option>
+                    </select>
                 </td>
                 <td class="py-3 px-6">
                     <div class="flex justify-center gap-2">
@@ -253,10 +279,45 @@ document.getElementById('statusFilter').addEventListener('change', function() {
         if (filterValue === 'all') {
             row.style.display = '';
         } else {
-            const statusCell = row.querySelector('td:nth-child(6) span');
-            const status = statusCell.textContent.toLowerCase();
+            const statusSelect = row.querySelector('td:nth-child(6) select');
+            const status = statusSelect.value.toLowerCase();
             row.style.display = status.includes(filterValue) ? '' : 'none';
         }
     });
 });
+
+// Function to update order status
+function updateOrderStatus(orderId, newStatus) {
+    // Update select background color based on status
+    const select = event.target;
+    select.className = 'px-2 py-1 text-xs font-semibold text-white rounded-full border-0 focus:ring-2 focus:ring-blue-500';
+    
+    switch(newStatus) {
+        case 'pending':
+            select.classList.add('bg-gray-500');
+            break;
+        case 'processing':
+            select.classList.add('bg-yellow-500');
+            break;
+        case 'shipped':
+            select.classList.add('bg-primary');
+            break;
+        case 'delivered':
+            select.classList.add('bg-green-500');
+            break;
+        case 'cancelled':
+            select.classList.add('bg-red-500');
+            break;
+    }
+    
+    // Here you would normally send an AJAX request to update the backend
+    console.log(`Order ${orderId} status updated to: ${newStatus}`);
+    
+    // Show success message (optional)
+    const originalBg = select.style.backgroundColor;
+    select.style.backgroundColor = '#10b981';
+    setTimeout(() => {
+        select.style.backgroundColor = originalBg;
+    }, 500);
+}
 </script>
