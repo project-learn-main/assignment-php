@@ -13,12 +13,10 @@ if (!isset($_SESSION['danhsachAdmin'])) {
                 setcookie('email', $email, time() + 3600,"/");
                 setcookie('name', $admin[2], time() + 3600,"/");
                 header('Location: ../index.php');
-               break;
-            } else{
-                $error = "Sai email hoặc mật khẩu";
-                break;
+                break;   
             }   
         }
+        $error = "Sai email hoặc mật khẩu";
     }
 ?>
 
