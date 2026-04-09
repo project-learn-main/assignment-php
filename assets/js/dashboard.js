@@ -48,7 +48,6 @@ document.addEventListener("DOMContentLoaded", function () {
       // Hide all tab contents
       tabContents.forEach((content) => {
         content.classList.add("hidden");
-        content.classList.remove("block");
       });
 
       // Show target tab content

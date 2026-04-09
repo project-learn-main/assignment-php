@@ -84,7 +84,7 @@
         <!-- Main Content -->
         <main class="flex-1 bg-dark overflow-auto">
             <!-- Orders Tab -->
-            <div id="orders-tab" class="tab-content active h-full">
+            <div id="orders-tab" class="tab-content block h-full">
                 <?php include 'Element/orders/index.php'; ?>
             </div>
 
