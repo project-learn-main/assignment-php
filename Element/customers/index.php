@@ -8,7 +8,6 @@ if (isset($_GET['idDelete']) && $_GET['idDelete'] != '') {
             break;
         }
     }
-    header('Location: index.php');
 }
 ?>
 <!-- Header -->
