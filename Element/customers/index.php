@@ -1,6 +1,15 @@
 <?php
 include_once __DIR__ . '/../../data/customers.php';
 
+if (isset($_GET['idDelete']) && $_GET['idDelete'] != '') {
+    foreach($_SESSION['customers'] as $index => $customer) {
+        if($customer['id'] == $_GET['idDelete']) {
+            unset($_SESSION['customers'][$index]);
+            break;
+        }
+    }
+    header('Location: index.php');
+}
 ?>
 <!-- Header -->
 <div class=" h-full">
@@ -69,7 +78,7 @@ include_once __DIR__ . '/../../data/customers.php';
                 echo '</td>';
                 echo '<td class="py-3 px-6 text-center">';
                 echo '<button class="px-3 py-1 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">Edit</button>';
-                echo '<button class="px-3 py-1 text-sm bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors ml-2">Delete</button>';
+                echo '<a href="index.php?tab=customers&idDelete=' . $customer['id'] . '" class="px-3 py-1 text-sm bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors ml-2">Delete</a>';
                 echo '</td>';
                 echo '</tr>';
              }
