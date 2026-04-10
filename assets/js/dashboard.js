@@ -25,6 +25,15 @@ function closeModal(modalId) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+  // Handle hash in URL to switch tabs
+  const hash = window.location.hash.substring(1);
+  if (hash) {
+    const targetLink = document.querySelector(`[data-tab="${hash}"]`);
+    if (targetLink) {
+      targetLink.click();
+    }
+  }
+
   // Tab switching functionality
   const navLinks = document.querySelectorAll("[data-tab]");
   const tabContents = document.querySelectorAll(".tab-content");

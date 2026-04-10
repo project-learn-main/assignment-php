@@ -44,7 +44,7 @@
                 <!-- Navigation -->
                 <ul class="flex-1 px-3 py-2">
                     <li class="mb-1">
-                        <a class="flex items-center px-3 py-2 text-white rounded-lg hover:bg-primary transition-colors bg-primary" href="#" data-tab="orders">
+                        <a class="flex items-center px-3 py-2 text-white rounded-lg hover:bg-primary transition-colors <?php echo (!isset($_GET['tab']) || $_GET['tab'] != 'customers') ? 'bg-primary' : ''; ?>" href="#" data-tab="orders">
                             <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z"></path>
                             </svg>
@@ -52,7 +52,7 @@
                         </a>
                     </li>
                     <li class="mb-1">
-                        <a class="flex items-center px-3 py-2 text-white rounded-lg hover:bg-primary transition-colors" href="#" data-tab="customers">
+                        <a class="flex items-center px-3 py-2 text-white rounded-lg hover:bg-primary transition-colors <?php echo (isset($_GET['tab']) && $_GET['tab'] == 'customers') ? 'bg-primary' : ''; ?>" href="#" data-tab="customers">
                             <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"></path>
                             </svg>
@@ -84,12 +84,12 @@
         <!-- Main Content -->
         <main class="flex-1 bg-dark overflow-auto">
             <!-- Orders Tab -->
-            <div id="orders-tab" class="tab-content block h-full">
+            <div id="orders-tab" class="tab-content <?php echo (isset($_GET['tab']) && $_GET['tab'] == 'customers') ? 'hidden' : 'block'; ?> h-full">
                 <?php include 'Element/orders/index.php'; ?>
             </div>
 
             <!-- Customers Tab -->      
-            <div id="customers-tab" class="tab-content hidden h-full">
+            <div id="customers-tab" class="tab-content <?php echo (isset($_GET['tab']) && $_GET['tab'] == 'customers') ? 'block' : 'hidden'; ?> h-full">
                 <?php include 'Element/customers/index.php'; ?>
             </div>
 

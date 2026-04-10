@@ -1,44 +1,33 @@
 <?php
 session_start();
-require_once '../config/database.php';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $phone = $_POST['phone'] ?? '';
+if(isset($_POST['name']) && isset($_POST['dateOfBirth']) && isset($_POST['gender']) && isset($_POST['address']) 
+   && isset($_POST['phone']) && isset($_FILES['image'])) {
+    $name = $_POST['name'];
+    $dateOfBirth = $_POST['dateOfBirth'];
+    $gender = $_POST['gender'];
+    $address = $_POST['address'];
+    $phone = $_POST['phone'];
+    $picture = $_FILES['image'];
+    $path = __DIR__ . '/../images';
     
-    if (!empty($name) && !empty($email) && !empty($phone)) {
-        $customers = getCustomers();
-        
-        // Check if email already exists
-        foreach ($customers as $customer) {
-            if ($customer['email'] === $email) {
-                $_SESSION['error'] = 'Email already exists!';
-                header('Location: ../index.php');
-                exit;
-            }
-        }
-        
-        $newCustomer = [
-            'id' => (string)(count($customers) + 1),
+    if (!is_dir($path))
+        mkdir($path);
+     // Hàm di chuy?n file
+    $targetPath = $path . '/' . $picture['name'];
+    if (move_uploaded_file($picture['tmp_name'], $targetPath)) {
+        $_SESSION['customers'][] = [
+            'id' => count($_SESSION['customers']) + 1,
             'name' => $name,
-            'email' => $email,
             'phone' => $phone,
-            'orders' => 0,
-            'totalSpent' => '0.00',
-            'joinDate' => date('Y-m-d'),
-            'status' => 'active'
+            'dateOfBirth' => $dateOfBirth,
+            'gender' => $gender,
+            'address' => $address,
+            'image' => 'images/' . $picture['name']
         ];
-        
-        $customers[] = $newCustomer;
-        saveCustomers($customers);
-        
-        $_SESSION['success'] = 'Customer added successfully!';
-    } else {
-        $_SESSION['error'] = 'Please fill in all required fields.';
-    }
+    } 
+   
 }
 
-header('Location: ../index.php');
+header('Location: ../index.php?tab=customers'); 
 exit;
 ?>

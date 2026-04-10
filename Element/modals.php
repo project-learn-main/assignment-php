@@ -333,7 +333,7 @@
                 </svg>
             </button>
         </div>
-        <form method="POST" action="actions/add_customer.php">
+        <form method="POST" action="actions/add_customer.php" enctype="multipart/form-data">
             <div class="p-4">
                 <div class="mb-4">
                     <label for="customerName" class="block text-gray-300 font-medium mb-2">Full Name</label>
@@ -341,14 +341,32 @@
                            id="customerName" name="name" required>
                 </div>
                 <div class="mb-4">
-                    <label for="customerEmail" class="block text-gray-300 font-medium mb-2">Email Address</label>
-                    <input type="email" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="customerEmail" name="email" required>
+                    <label for="customerEmail" class="block text-gray-300 font-medium mb-2">Date of Birth</label>
+                    <input type="date" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                           id="customerEmail" name="dateOfBirth" required>
+                </div>
+                <div class="mb-4">
+                    <label for="customerEmail" class="block text-gray-300 font-medium mb-2">Gender</label>
+                    <select class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                           id="customerEmail" name="gender" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
                 </div>
                 <div class="mb-4">
                     <label for="customerPhone" class="block text-gray-300 font-medium mb-2">Phone Number</label>
                     <input type="tel" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
                            id="customerPhone" name="phone" required>
+                </div>
+                <div class="mb-4">
+                    <label for="customerPhone" class="block text-gray-300 font-medium mb-2">Address</label>
+                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                           id="customerPhone" name="address" required>
+                </div>
+                <div class="mb-4">
+                    <label for="customerImage" class="block text-gray-300 font-medium mb-2">Profile Image</label>
+                    <input type="file" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                           id="customerImage" name="image" required accept="image/*">
                 </div>
             </div>
             <div class="flex items-center justify-end gap-2 p-4 border-t border-gray-700">
