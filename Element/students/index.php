@@ -46,11 +46,11 @@
                     <th class="text-left py-3 px-6 font-medium text-gray-300">Student ID</th>
                     <th class="text-left py-3 px-6 font-medium text-gray-300">Name</th>
                     <th class="text-left py-3 px-6 font-medium text-gray-300">Email</th>
-                    <th class="text-left py-3 px-6 font-medium text-gray-300">Course</th>
-                    <th class="text-left py-3 px-6 font-medium text-gray-300">Year</th>
-                    <th class="text-left py-3 px-6 font-medium text-gray-300">GPA</th>
-                    <th class="text-left py-3 px-6 font-medium text-gray-300">Enrollment Date</th>
+                    <th class="text-left py-3 px-6 font-medium text-gray-300">Phone</th>
+                    <th class="text-left py-3 px-6 font-medium text-gray-300">Gender</th>
+                    <th class="text-left py-3 px-6 font-medium text-gray-300">Address</th>
                     <th class="text-left py-3 px-6 font-medium text-gray-300">Status</th>
+                    <th class="text-left py-3 px-6 font-medium text-gray-300">Image</th>
                     <th class="text-center py-3 px-6 font-medium text-gray-300">Actions</th>
                 </tr>
             </thead>
@@ -59,8 +59,17 @@
                     <td class="py-3 px-6 font-semibold">STU001</td>
                     <td class="py-3 px-6">Alice Johnson</td>
                     <td class="py-3 px-6">alice.j@school.edu</td>
-                    <td class="py-3 px-6">Computer Science</td>
-                    <td class="py-3 px-6">3rd Year</td>
+                    <td class="py-3 px-6">123-456-7890</td>
+                    <td class="py-3 px-6">Female</td>
+                    <td class="py-3 px-6">123 Main St, City, State</td>
+                    <td class="py-3 px-6">
+                        <span class="inline-block px-2 py-1 text-xs font-semibold text-white rounded-full bg-green-500">
+                            Active
+                        </span>
+                    </td>
+                    <td class="py-3 px-6">
+                        <img src="https://via.placeholder.com/50" alt="Student Image" class="w-12 h-12 rounded-full">
+                    </td>
                     <td class="py-3 px-6">
                         <span class="inline-block px-2 py-1 text-xs font-semibold text-white rounded-full bg-green-500">
                             3.8
@@ -97,8 +106,17 @@
                     <td class="py-3 px-6 font-semibold">STU002</td>
                     <td class="py-3 px-6">Bob Smith</td>
                     <td class="py-3 px-6">bob.smith@school.edu</td>
-                    <td class="py-3 px-6">Business Administration</td>
-                    <td class="py-3 px-6">2nd Year</td>
+                    <td class="py-3 px-6">123-456-7890</td>
+                    <td class="py-3 px-6">Male</td>
+                    <td class="py-3 px-6">123 Main St, City, State</td>
+                    <td class="py-3 px-6">
+                        <span class="inline-block px-2 py-1 text-xs font-semibold text-white rounded-full bg-green-500">
+                            Active
+                        </span>
+                    </td>
+                    <td class="py-3 px-6">
+                        <img src="https://via.placeholder.com/50" alt="Student Image" class="w-12 h-12 rounded-full">
+                    </td>
                     <td class="py-3 px-6">
                         <span class="inline-block px-2 py-1 text-xs font-semibold text-white rounded-full bg-primary">
                             3.5
@@ -135,8 +153,17 @@
                     <td class="py-3 px-6 font-semibold">STU003</td>
                     <td class="py-3 px-6">Carol Williams</td>
                     <td class="py-3 px-6">carol.w@school.edu</td>
-                    <td class="py-3 px-6">Engineering</td>
-                    <td class="py-3 px-6">4th Year</td>
+                    <td class="py-3 px-6">123-456-7890</td>
+                    <td class="py-3 px-6">Female</td>
+                    <td class="py-3 px-6">123 Main St, City, State</td>
+                    <td class="py-3 px-6">
+                        <span class="inline-block px-2 py-1 text-xs font-semibold text-white rounded-full bg-green-500">
+                            Active
+                        </span>
+                    </td>
+                    <td class="py-3 px-6">
+                        <img src="https://via.placeholder.com/50" alt="Student Image" class="w-12 h-12 rounded-full">
+                    </td>
                     <td class="py-3 px-6">
                         <span class="inline-block px-2 py-1 text-xs font-semibold text-white rounded-full bg-green-500">
                             3.9

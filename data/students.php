@@ -51,5 +51,8 @@ $dataStudents = [
         'status' => 'Inactive'
     ]
 ];
-return $dataStudents;
+if (!isset($_SESSION['students'])) {
+    $_SESSION['students'] = $dataStudents;
+}
+
 ?>
