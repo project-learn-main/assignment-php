@@ -13,23 +13,23 @@
             <div class="p-4">
                 <div class="mb-4">
                     <label for="orderId" class="block text-gray-300 font-medium mb-2">Mã don</label>
-                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="orderId" name="orderId" required placeholder="ORD-XXX">
+                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="orderId" name="orderId" required placeholder="ORD-XXX">
                 </div>
                 <div class="mb-4">
                     <label for="orderCustomer" class="block text-gray-300 font-medium mb-2">Tên khách hàng</label>
-                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="orderCustomer" name="customer" required>
+                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="orderCustomer" name="customer" required>
                 </div>
                 <div class="mb-4">
                     <label for="orderDate" class="block text-gray-300 font-medium mb-2">Ngày mua</label>
-                    <input type="date" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="orderDate" name="orderDate" required>
+                    <input type="date" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="orderDate" name="orderDate" required>
                 </div>
                 <div class="mb-4">
                     <label for="orderStatus" class="block text-gray-300 font-medium mb-2">Trang thái don hàng</label>
-                    <select class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                            id="orderStatus" name="status" required>
+                    <select class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="orderStatus" name="status" required>
                         <option value="processing">Đang xử lý</option>
                         <option value="processed">Đã xử lý</option>
                         <option value="shipping">Đang vận chuyển</option>
@@ -37,84 +37,37 @@
                         <option value="cancelled">Hủy đơn</option>
                     </select>
                 </div>
-                
+
                 <!-- Product Information -->
                 <div class="mb-4">
                     <label for="productId" class="block text-gray-300 font-medium mb-2">Mã sp</label>
-                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="productId" name="productId" required placeholder="PRD-XXX">
+                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="productId" name="productId" required placeholder="PRD-XXX">
                 </div>
                 <div class="mb-4">
                     <label for="productName" class="block text-gray-300 font-medium mb-2">Tên sp</label>
-                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="productName" name="productName" required>
+                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="productName" name="productName" required>
                 </div>
                 <div class="mb-4">
                     <label for="unitPrice" class="block text-gray-300 font-medium mb-2">Don giá</label>
-                    <input type="number" step="0.01" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="unitPrice" name="unitPrice" required>
+                    <input type="number" step="0.01" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="unitPrice" name="unitPrice" required>
                 </div>
                 <div class="mb-4">
                     <label for="quantity" class="block text-gray-300 font-medium mb-2">Sô luong</label>
-                    <input type="number" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="quantity" name="quantity" required>
+                    <input type="number" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="quantity" name="quantity" required>
                 </div>
                 <div class="mb-4">
                     <label for="productImage" class="block text-gray-300 font-medium mb-2">Hình anh</label>
-                    <input type="file" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent file:text-gray-400" 
-                           id="productImage" name="productImage" accept="image/*">
+                    <input type="file" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent file:text-gray-400"
+                        id="productImage" name="productImage" accept="image/*">
                 </div>
             </div>
             <div class="flex items-center justify-end gap-2 p-4 border-t border-gray-700">
                 <button type="button" class="px-4 py-2 border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-700 transition-colors" onclick="closeModal('addOrderModal')">Cancel</button>
                 <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-80 transition-colors">Add Order</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<!-- Update Order Modal -->
-<div id="updateOrderModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-    <div class="bg-gray-800 text-white rounded-xl max-w-md w-full mx-4">
-        <div class="flex items-center justify-between p-4 border-b border-gray-700">
-            <h5 class="text-lg font-semibold">Update Order</h5>
-            <button type="button" class="text-gray-400 hover:text-white transition-colors" onclick="closeModal('updateOrderModal')">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-            </button>
-        </div>
-        <form method="POST" action="actions/update_order.php">
-            <input type="hidden" id="updateOrderId" name="id">
-            <div class="p-4">
-                <div class="mb-4">
-                    <label for="updateOrderCustomer" class="block text-gray-300 font-medium mb-2">Customer Name</label>
-                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="updateOrderCustomer" name="customer" required>
-                </div>
-                <div class="mb-4">
-                    <label for="updateOrderAmount" class="block text-gray-300 font-medium mb-2">Amount</label>
-                    <input type="number" step="0.01" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="updateOrderAmount" name="amount" required>
-                </div>
-                <div class="mb-4">
-                    <label for="updateOrderItems" class="block text-gray-300 font-medium mb-2">Number of Items</label>
-                    <input type="number" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="updateOrderItems" name="items" required>
-                </div>
-                <div class="mb-4">
-                    <label for="updateOrderStatus" class="block text-gray-300 font-medium mb-2">Status</label>
-                    <select class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" id="updateOrderStatus" name="status" required>
-                        <option value="pending">Pending</option>
-                        <option value="processing">Processing</option>
-                        <option value="shipped">Shipped</option>
-                        <option value="delivered">Delivered</option>
-                    </select>
-                </div>
-            </div>
-            <div class="flex items-center justify-end gap-2 p-4 border-t border-gray-700">
-                <button type="button" class="px-4 py-2 border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-700 transition-colors" onclick="closeModal('updateOrderModal')">Cancel</button>
-                <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-80 transition-colors">Update Order</button>
             </div>
         </form>
     </div>
@@ -155,45 +108,15 @@
                 </div>
             </div>
 
-            <!-- Order Total -->
+            <!-- Order Total
             <div class="border-t border-gray-700 pt-4">
                 <div class="flex justify-between items-center">
                     <span class="text-lg font-semibold text-white">Total:</span>
                     <span class="text-xl font-bold text-primary" id="viewOrderTotal"></span>
                 </div>
-            </div>
+            </div> -->
         </div>
-        <div class="flex items-center justify-end gap-2 p-4 border-t border-gray-700">
 
-                <!-- Additional Fields (Hidden for now, can be expanded) -->
-                <div class="mb-4">
-                    <label for="orderAddress" class="block text-gray-300 font-medium mb-2">Shipping Address</label>
-                    <textarea class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                              id="orderAddress" name="address" rows="3" placeholder="Enter shipping address"></textarea>
-                </div>
-                <div class="mb-4">
-                    <label for="orderPayment" class="block text-gray-300 font-medium mb-2">Payment Method</label>
-                    <select class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                            id="orderPayment" name="paymentMethod">
-                        <option value="">Select Payment Method</option>
-                        <option value="credit_card">Credit Card</option>
-                        <option value="debit_card">Debit Card</option>
-                        <option value="paypal">PayPal</option>
-                        <option value="cash_on_delivery">Cash on Delivery</option>
-                        <option value="bank_transfer">Bank Transfer</option>
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <label for="orderNotes" class="block text-gray-300 font-medium mb-2">Order Notes</label>
-                    <textarea class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                              id="orderNotes" name="notes" rows="2" placeholder="Additional order notes (optional)"></textarea>
-                </div>
-            </div>
-            <div class="flex items-center justify-end gap-2 p-4 border-t border-gray-700">
-                <button type="button" class="px-4 py-2 border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-700 transition-colors" onclick="closeModal('addOrderModal')">Cancel</button>
-                <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-80 transition-colors">Add Order</button>
-            </div>
-        </form>
     </div>
 </div>
 
@@ -246,36 +169,36 @@
             <div class="p-4">
                 <div class="mb-4">
                     <label for="customerName" class="block text-gray-300 font-medium mb-2">Full Name</label>
-                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="customerName" name="name" required>
+                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="customerName" name="name" required>
                 </div>
                 <div class="mb-4">
                     <label for="customerEmail" class="block text-gray-300 font-medium mb-2">Date of Birth</label>
-                    <input type="date" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="customerEmail" name="dateOfBirth" required>
+                    <input type="date" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="customerEmail" name="dateOfBirth" required>
                 </div>
                 <div class="mb-4">
                     <label for="customerEmail" class="block text-gray-300 font-medium mb-2">Gender</label>
-                    <select class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="customerEmail" name="gender" required>
+                    <select class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="customerEmail" name="gender" required>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                     </select>
                 </div>
                 <div class="mb-4">
                     <label for="customerPhone" class="block text-gray-300 font-medium mb-2">Phone Number</label>
-                    <input type="tel" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="customerPhone" name="phone" required>
+                    <input type="tel" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="customerPhone" name="phone" required>
                 </div>
                 <div class="mb-4">
                     <label for="customerPhone" class="block text-gray-300 font-medium mb-2">Address</label>
-                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="customerPhone" name="address" required>
+                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="customerPhone" name="address" required>
                 </div>
                 <div class="mb-4">
                     <label for="customerImage" class="block text-gray-300 font-medium mb-2">Profile Image</label>
-                    <input type="file" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="customerImage" name="image" required accept="image/*">
+                    <input type="file" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="customerImage" name="image" required accept="image/*">
                 </div>
             </div>
             <div class="flex items-center justify-end gap-2 p-4 border-t border-gray-700">
@@ -302,24 +225,24 @@
             <div class="p-4">
                 <div class="mb-4">
                     <label for="updateCustomerName" class="block text-gray-300 font-medium mb-2">Full Name</label>
-                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="updateCustomerName" name="name" required>
+                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="updateCustomerName" name="name" required>
                 </div>
-                
+
                 <div class="mb-4">
                     <label for="updateCustomerPhone" class="block text-gray-300 font-medium mb-2">Phone Number</label>
-                    <input type="tel" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="updateCustomerPhone" name="phone" required>
+                    <input type="tel" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="updateCustomerPhone" name="phone" required>
                 </div>
                 <div class="mb-4">
                     <label for="updateCustomerDateOfBirth" class="block text-gray-300 font-medium mb-2">Date Of Birth</label>
-                    <input type="date" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="updateCustomerDateOfBirth" name="dateOfBirth" required>
+                    <input type="date" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="updateCustomerDateOfBirth" name="dateOfBirth" required>
                 </div>
                 <div class="mb-4">
                     <label for="updateCustomerGender" class="block text-gray-300 font-medium mb-2">Gender</label>
-                    <select class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="updateCustomerGender" name="gender" required>
+                    <select class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="updateCustomerGender" name="gender" required>
                         <option value="">Select Gender</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
@@ -327,8 +250,8 @@
                 </div>
                 <div class="mb-4">
                     <label for="updateCustomerAddress" class="block text-gray-300 font-medium mb-2">Address</label>
-                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="updateCustomerAddress" name="address" required>
+                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="updateCustomerAddress" name="address" required>
                 </div>
                 <div class="mb-4">
                     <label for="updateCustomerPersonalImage" class="block text-gray-300 font-medium mb-2">Personal Image</label>
@@ -344,8 +267,8 @@
                         <!-- New Image Upload -->
                         <div>
                             <label class="block text-sm text-gray-400 mb-1">Upload New Image (Optional)</label>
-                            <input type="file" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent file:text-gray-400" 
-                                   id="updateCustomerPersonalImage" name="personal_image" accept="image/*">
+                            <input type="file" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent file:text-gray-400"
+                                id="updateCustomerPersonalImage" name="personal_image" accept="image/*">
                         </div>
                     </div>
                 </div>
@@ -480,41 +403,41 @@
             <div class="p-4">
                 <div class="mb-4">
                     <label for="studentName" class="block text-gray-300 font-medium mb-2">Full Name</label>
-                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="studentName" name="name" required>
+                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="studentName" name="name" required>
                 </div>
                 <div class="mb-4">
                     <label for="studentEmail" class="block text-gray-300 font-medium mb-2">Date of Birth</label>
-                    <input type="date" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="studentEmail" name="dateOfBirth" required>
+                    <input type="date" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="studentEmail" name="dateOfBirth" required>
                 </div>
                 <div class="mb-4">
                     <label for="studentEmail" class="block text-gray-300 font-medium mb-2">Gender</label>
-                    <select class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="studentEmail" name="gender" required>
+                    <select class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="studentEmail" name="gender" required>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                     </select>
                 </div>
                 <div class="mb-4">
                     <label for="studentPhone" class="block text-gray-300 font-medium mb-2">Phone Number</label>
-                    <input type="tel" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="studentPhone" name="phone" required>
+                    <input type="tel" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="studentPhone" name="phone" required>
                 </div>
-                 <div class="mb-4">
+                <div class="mb-4">
                     <label for="studentEmail" class="block text-gray-300 font-medium mb-2">Email</label>
-                    <input type="email" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="studentEmail" name="email" required>
+                    <input type="email" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="studentEmail" name="email" required>
                 </div>
                 <div class="mb-4">
                     <label for="studentAddress" class="block text-gray-300 font-medium mb-2">Address</label>
-                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="studentAddress" name="address" required>
+                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="studentAddress" name="address" required>
                 </div>
                 <div class="mb-4">
                     <label for="studentImage" class="block text-gray-300 font-medium mb-2">Profile Image</label>
-                    <input type="file" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="studentImage" name="image" required accept="image/*">
+                    <input type="file" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="studentImage" name="image" required accept="image/*">
                 </div>
             </div>
             <div class="flex items-center justify-end gap-2 p-4 border-t border-gray-700">
@@ -541,23 +464,23 @@
             <div class="p-4">
                 <div class="mb-4">
                     <label for="updateStudentName" class="block text-gray-300 font-medium mb-2">Full Name</label>
-                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="updateStudentName" name="name" required>
+                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="updateStudentName" name="name" required>
                 </div>
                 <div class="mb-4">
                     <label for="updateStudentEmail" class="block text-gray-300 font-medium mb-2">Email Address</label>
-                    <input type="email" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="updateStudentEmail" name="email" required>
-                    </div>
-                    <div class="mb-4">
-                        <label for="updateStudentIdNum" class="block text-gray-300 font-medium mb-2">Student ID</label>
-                        <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                            id="updateStudentIdNum" name="studentId" readonly>
-                    </div>
+                    <input type="email" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="updateStudentEmail" name="email" required>
+                </div>
+                <div class="mb-4">
+                    <label for="updateStudentIdNum" class="block text-gray-300 font-medium mb-2">Student ID</label>
+                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="updateStudentIdNum" name="studentId" readonly>
+                </div>
                 <div class="mb-4">
                     <label for="updateStudentPhone" class="block text-gray-300 font-medium mb-2">Sô diên thoai</label>
-                    <input type="tel" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="updateStudentPhone" name="phone" required>
+                    <input type="tel" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="updateStudentPhone" name="phone" required>
                 </div>
                 <div class="mb-4">
                     <label for="updateStudentGender" class="block text-gray-300 font-medium mb-2">Giói tính</label>
@@ -569,8 +492,8 @@
                 </div>
                 <div class="mb-4">
                     <label for="updateStudentAddress" class="block text-gray-300 font-medium mb-2">Quê quán</label>
-                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="updateStudentAddress" name="address" required>
+                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="updateStudentAddress" name="address" required>
                 </div>
                 <div class="mb-4">
                     <label for="updateStudentStatus" class="block text-gray-300 font-medium mb-2">Trang thái</label>
@@ -595,8 +518,8 @@
                         <!-- New Image Upload -->
                         <div>
                             <label class="block text-sm text-gray-400 mb-1">Upload New Image (Optional)</label>
-                            <input type="file" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent file:text-gray-400" 
-                                   id="updateStudentImage" name="image" accept="image/*">
+                            <input type="file" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent file:text-gray-400"
+                                id="updateStudentImage" name="image" accept="image/*">
                         </div>
                     </div>
                 </div>

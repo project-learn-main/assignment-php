@@ -99,47 +99,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Functions to handle update and delete modals
 function viewDetailOrder(orderId) {
-  console.log("viewDetailOrder called with orderId:", orderId);
-
-  // Get order data from the table row
   const row = document.querySelector(`tr[data-order-id="${orderId}"]`);
   if (!row) return;
 
   const cells = row.querySelectorAll("td");
-  const orderInfo = cells[0].textContent;
-  const customerName = cells[1].textContent;
-  const amount = cells[3].textContent.replace("$", "");
-  const items = cells[4].textContent;
+  console.log("🚀 ~ viewDetailOrder ~ cells:", cells);
 
-  // Populate the view modal
+  const orderInfo = cells[0].textContent.trim();
+  const customerName = cells[1].textContent.trim();
+
+  const unitPrice = Number(cells[3].textContent.replace("$", ""));
+  const quantity = Number(cells[4].textContent);
+
   document.getElementById("viewOrderId").textContent = orderInfo;
   document.getElementById("viewOrderCustomer").textContent = customerName;
 
-  // Generate sample items based on the number of items
-  const itemsData = generateSampleItems(parseInt(items), parseFloat(amount));
   const itemsContainer = document.getElementById("viewOrderItems");
   itemsContainer.innerHTML = "";
 
-  itemsData.forEach((item) => {
-    const itemDiv = document.createElement("div");
-    itemDiv.className = "bg-gray-900 rounded-lg p-3 border border-gray-700";
-    itemDiv.innerHTML = `
-      <div class="flex justify-between items-start">
-        <div class="flex-1">
-          <p class="text-white font-medium">${item.name}</p>
-          <p class="text-gray-400 text-sm">${item.quantity} x $${item.price.toFixed(2)}</p>
-        </div>
-        <div class="text-right">
-          <p class="text-white font-semibold">$${item.total.toFixed(2)}</p>
-        </div>
-      </div>
-    `;
-    itemsContainer.appendChild(itemDiv);
-  });
+  const itemDiv = document.createElement("div");
+  itemDiv.className = "bg-gray-900 rounded-lg p-3 border border-gray-700";
 
-  // Display total
-  document.getElementById("viewOrderTotal").textContent =
-    `$${parseFloat(amount).toFixed(2)}`;
+  itemDiv.innerHTML = `
+    <div class="flex justify-between items-start">
+      <div class="flex-1">
+        <p class="text-white font-medium">Product</p>
+        <p class="text-gray-400 text-sm">${quantity} x $${unitPrice.toFixed(2)}</p>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzSOrIHIncvVwcn86Yj1lG2no3rymRPhF1AQ&s"
+        class="w-20 h-20"
+        alt="img product" />
+         </div>
+    </div>
+  `;
+
+  itemsContainer.appendChild(itemDiv);
 
   openModal("viewOrderDetailsModal");
 }
@@ -305,7 +298,7 @@ function updateStudent(studentId) {
   console.log("🚀 ~ updateStudent ~ gender:", gender);
   const address = cells[5].textContent; // Quê quán
   const status = cells[6].querySelector("select").value; // Trang thái
-  
+
   // Populate update modal with table data
   document.getElementById("updateStudentId").value = studentId;
   document.getElementById("updateStudentName").value = name;
