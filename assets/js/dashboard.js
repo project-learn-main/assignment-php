@@ -296,26 +296,16 @@ function updateStudent(studentId) {
   if (!row) return;
 
   const cells = row.querySelectorAll("td");
+  console.log("🚀 ~ updateStudent ~ cells:", cells);
   const id = cells[0].textContent; // Mã SV
   const name = cells[1].textContent; // Tên SV
   const email = cells[2].textContent; // Email
   const phone = cells[3].textContent; // Sô diên thoai
   const gender = cells[4].textContent; // Giói tính
+  console.log("🚀 ~ updateStudent ~ gender:", gender);
   const address = cells[5].textContent; // Quê quán
-  const status = cells[6].textContent; // Trang thái
-
-  // Debug: Log all cell values
-  console.log("All cell values in updateStudent:");
-  for (let i = 0; i < cells.length; i++) {
-    console.log(`Cell ${i}: "${cells[i].textContent}"`);
-  }
-  console.log(
-    "Extracted values - Gender:",
-    JSON.stringify(gender),
-    "Status:",
-    JSON.stringify(status),
-  );
-
+  const status = cells[6].querySelector("select").value; // Trang thái
+  
   // Populate update modal with table data
   document.getElementById("updateStudentId").value = studentId;
   document.getElementById("updateStudentName").value = name;
@@ -324,11 +314,7 @@ function updateStudent(studentId) {
   document.getElementById("updateStudentPhone").value = phone;
   // Set gender select value manually
   const genderSelect = document.getElementById("updateStudentGender");
-  console.log("Gender select options:");
   for (let i = 0; i < genderSelect.options.length; i++) {
-    console.log(
-      `  Option ${i}: value="${genderSelect.options[i].value}", text="${genderSelect.options[i].text}"`,
-    );
     genderSelect.options[i].selected = genderSelect.options[i].value === gender;
   }
 
@@ -336,11 +322,7 @@ function updateStudent(studentId) {
 
   // Set status select value manually
   const statusSelect = document.getElementById("updateStudentStatus");
-  console.log("Status select options:");
   for (let i = 0; i < statusSelect.options.length; i++) {
-    console.log(
-      `  Option ${i}: value="${statusSelect.options[i].value}", text="${statusSelect.options[i].text}"`,
-    );
     statusSelect.options[i].selected = statusSelect.options[i].value === status;
   }
 
