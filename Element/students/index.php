@@ -25,20 +25,25 @@ include_once __DIR__ . '/../../data/students.php';
                         <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
-                        <input type="text" class="w-full pl-10 pr-4 py-2 bg-gray-800 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400" 
-                            placeholder="Search by name, email, or student ID..." 
-                            value="<?php //echo htmlspecialchars($searchQuery); ?>"
+                        <input type="text" class="w-full pl-10 pr-4 py-2 bg-gray-800 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
+                            placeholder="Search by name, email, or student ID..."
+                            value="<?php //echo htmlspecialchars($searchQuery); 
+                                    ?>"
                             id="studentSearch">
                     </div>
                 </div>
                 <div class="w-48">
                     <select class="w-full px-4 py-2 bg-gray-800 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" id="courseFilter">
-                        <option value="all" 
-                        <?php //echo $filterCourse === 'all' ? 'selected' : ''; ?>>
-                        All Courses</option>
-                        <option value="Computer Science" <?php //echo $filterCourse === 'Computer Science' ? 'selected' : ''; ?>>Computer Science</option>
-                        <option value="Business Administration" <?php //echo $filterCourse === 'Business Administration' ? 'selected' : ''; ?>>Business Administration</option>
-                        <option value="Engineering" <?php //echo $filterCourse === 'Engineering' ? 'selected' : ''; ?>>Engineering</option>
+                        <option value="all"
+                            <?php //echo $filterCourse === 'all' ? 'selected' : ''; 
+                            ?>>
+                            All Courses</option>
+                        <option value="Computer Science" <?php //echo $filterCourse === 'Computer Science' ? 'selected' : ''; 
+                                                            ?>>Computer Science</option>
+                        <option value="Business Administration" <?php //echo $filterCourse === 'Business Administration' ? 'selected' : ''; 
+                                                                ?>>Business Administration</option>
+                        <option value="Engineering" <?php //echo $filterCourse === 'Engineering' ? 'selected' : ''; 
+                                                    ?>>Engineering</option>
                     </select>
                 </div>
             </div>
@@ -62,8 +67,8 @@ include_once __DIR__ . '/../../data/students.php';
                 </tr>
             </thead>
             <tbody>
-                <?php 
-                $students = $_SESSION['students']; 
+                <?php
+                $students = $_SESSION['students'];
                 foreach ($students as $student) {
                     echo '<tr class="border-b border-gray-800 hover:bg-gray-800 transition-colors" data-student-id="' . $student['id'] . '">';
                     echo '<td class="py-3 px-4 font-semibold">' . ($student['studentId'] ?? $student['id']) . '</td>';
@@ -77,7 +82,7 @@ include_once __DIR__ . '/../../data/students.php';
                     echo '<form method="POST" action="actions/update_student_status.php" style="margin: 0;">';
                     echo '<input type="hidden" name="id" value="' . $student['id'] . '">';
                     echo '<select class="w-full px-2 py-1 bg-gray-700 border border-gray-600 text-white rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                             name="status" onchange="this.form.submit()">';
+                                 name="status" onchange="this.form.submit()">';
                     echo '<option value="Đang học"' . ($status === 'Đang học' ? ' selected' : '') . '>Đang học</option>';
                     echo '<option value="Bảo lưu"' . ($status === 'Bảo lưu' ? ' selected' : '') . '>Bảo lưu</option>';
                     echo '<option value="Thôi học"' . ($status === 'Thôi học' ? ' selected' : '') . '>Thôi học</option>';
@@ -112,5 +117,3 @@ include_once __DIR__ . '/../../data/students.php';
         </table>
     </div>
 </div>
-
-
