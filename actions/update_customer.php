@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
         error_log("Session customers count: " . count($_SESSION['customers']));
         foreach ($_SESSION['customers'] as $customer) {
             error_log("Checking customer: id={$customer['id']}, name={$customer['name']}");
-            if ($customer['id'] === $customerId) {
+            if ($customer['id'] == $customerId) {
                 $existingCustomer = $customer;
                 error_log("Found matching customer: " . print_r($existingCustomer, true));
                 break;
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     // Find and update customer in session
     if (isset($_SESSION['customers'])) {
         foreach ($_SESSION['customers'] as $key => $customer) {
-            if ($customer['id'] === $customerId) {
+            if ($customer['id'] == $customerId) {
                 $_SESSION['customers'][$key] = $updatedData;
                 break;
             }
