@@ -1,53 +1,37 @@
 <?php
 session_start();
-require_once '../config/database.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $studentId = $_POST['studentId'] ?? '';
-    $course = $_POST['course'] ?? '';
-    $year = $_POST['year'] ?? '';
-    $gpa = $_POST['gpa'] ?? '';
+if(isset($_POST['name']) && isset($_POST['dateOfBirth']) && isset($_POST['gender']) && isset($_POST['address']) 
+    && isset($_POST['phone']) && isset($_POST['email']) && isset($_FILES['image'])) { 
+
+    $name = $_POST['name'];
+    $dateOfBirth = $_POST['dateOfBirth'];
+    $gender = $_POST['gender'];
+    $address = $_POST['address'];
+    $phone = $_POST['phone'];
+    $email = $_POST['email'];
+    $picture = $_FILES['image'];
+    $path = __DIR__ . '/../images'; 
     
-    if (!empty($name) && !empty($email) && !empty($studentId) && !empty($course) && !empty($year) && !empty($gpa)) {
-        $students = getStudents();
-        
-        // Check if student ID or email already exists
-        foreach ($students as $student) {
-            if ($student['studentId'] === $studentId) {
-                $_SESSION['error'] = 'Student ID already exists!';
-                header('Location: ../index.php');
-                exit;
-            }
-            if ($student['email'] === $email) {
-                $_SESSION['error'] = 'Email already exists!';
-                header('Location: ../index.php');
-                exit;
-            }
-        }
-        
-        $newStudent = [
-            'id' => (string)(count($students) + 1),
-            'name' => $name,
-            'email' => $email,
-            'studentId' => $studentId,
-            'course' => $course,
-            'year' => $year,
-            'gpa' => $gpa,
-            'enrollmentDate' => date('Y-m-d'),
-            'status' => 'active'
-        ];
-        
-        $students[] = $newStudent;
-        saveStudents($students);
-        
-        $_SESSION['success'] = 'Student added successfully!';
-    } else {
-        $_SESSION['error'] = 'Please fill in all required fields.';
-    }
-}
+    if (!is_dir($path))
+        mkdir($path);
 
-header('Location: ../index.php');
+    $targetPath = $path . '/' . $picture['name'];
+    if (move_uploaded_file($picture['tmp_name'], $targetPath)) {
+        $_SESSION['students'][] = [
+     'id' => count($_SESSION['students']) + 1,
+    'name' => $name,
+    'dateOfBirth' => $dateOfBirth,
+    'gender' => $gender,
+    'phone' => $phone,
+    'email' => $email,
+    'address' => $address,
+    'image' => 'images/' . $picture['name'],
+];
+} 
+
+
+}
+header('Location: ../index.php?tab=students');
 exit;
 ?>

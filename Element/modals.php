@@ -120,6 +120,83 @@
     </div>
 </div>
 
+<!-- View Order Details Modal -->
+<div id="viewOrderDetailsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-gray-800 text-white rounded-xl max-w-md w-full mx-4">
+        <div class="flex items-center justify-between p-4 border-b border-gray-700">
+            <h5 class="text-lg font-semibold">Order Details</h5>
+            <button type="button" class="text-gray-400 hover:text-white transition-colors" onclick="closeModal('viewOrderDetailsModal')">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="p-6">
+            <!-- Order Information -->
+            <div class="mb-6">
+                <h6 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Order Information</h6>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-sm text-gray-400">Order ID</p>
+                        <p class="text-white font-semibold" id="viewOrderId"></p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-400">Customer</p>
+                        <p class="text-white font-semibold" id="viewOrderCustomer"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Items -->
+            <div class="mb-6">
+                <h6 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Products</h6>
+                <div class="space-y-3" id="viewOrderItems">
+                    <!-- Items will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Order Total -->
+            <div class="border-t border-gray-700 pt-4">
+                <div class="flex justify-between items-center">
+                    <span class="text-lg font-semibold text-white">Total:</span>
+                    <span class="text-xl font-bold text-primary" id="viewOrderTotal"></span>
+                </div>
+            </div>
+        </div>
+        <div class="flex items-center justify-end gap-2 p-4 border-t border-gray-700">
+
+                <!-- Additional Fields (Hidden for now, can be expanded) -->
+                <div class="mb-4">
+                    <label for="orderAddress" class="block text-gray-300 font-medium mb-2">Shipping Address</label>
+                    <textarea class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                              id="orderAddress" name="address" rows="3" placeholder="Enter shipping address"></textarea>
+                </div>
+                <div class="mb-4">
+                    <label for="orderPayment" class="block text-gray-300 font-medium mb-2">Payment Method</label>
+                    <select class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                            id="orderPayment" name="paymentMethod">
+                        <option value="">Select Payment Method</option>
+                        <option value="credit_card">Credit Card</option>
+                        <option value="debit_card">Debit Card</option>
+                        <option value="paypal">PayPal</option>
+                        <option value="cash_on_delivery">Cash on Delivery</option>
+                        <option value="bank_transfer">Bank Transfer</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="orderNotes" class="block text-gray-300 font-medium mb-2">Order Notes</label>
+                    <textarea class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                              id="orderNotes" name="notes" rows="2" placeholder="Additional order notes (optional)"></textarea>
+                </div>
+            </div>
+            <div class="flex items-center justify-end gap-2 p-4 border-t border-gray-700">
+                <button type="button" class="px-4 py-2 border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-700 transition-colors" onclick="closeModal('addOrderModal')">Cancel</button>
+                <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-80 transition-colors">Add Order</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <!-- Delete Order Modal -->
 <div id="deleteOrderModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
     <div class="bg-gray-800 text-white rounded-xl max-w-md w-full mx-4">
@@ -149,6 +226,61 @@
             <div class="flex items-center justify-end gap-2 p-4 border-t border-gray-700">
                 <button type="button" class="px-4 py-2 border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-700 transition-colors" onclick="closeModal('deleteOrderModal')">Cancel</button>
                 <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">Delete Order</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Add Customer Modal -->
+<div id="addCustomerModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-gray-800 text-white rounded-xl max-w-md w-full mx-4">
+        <div class="flex items-center justify-between p-4 border-b border-gray-700">
+            <h5 class="text-lg font-semibold">Add New Customer</h5>
+            <button type="button" class="text-gray-400 hover:text-white transition-colors" onclick="closeModal('addCustomerModal')">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        <form method="POST" action="actions/add_customer.php" enctype="multipart/form-data">
+            <div class="p-4">
+                <div class="mb-4">
+                    <label for="customerName" class="block text-gray-300 font-medium mb-2">Full Name</label>
+                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                           id="customerName" name="name" required>
+                </div>
+                <div class="mb-4">
+                    <label for="customerEmail" class="block text-gray-300 font-medium mb-2">Date of Birth</label>
+                    <input type="date" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                           id="customerEmail" name="dateOfBirth" required>
+                </div>
+                <div class="mb-4">
+                    <label for="customerEmail" class="block text-gray-300 font-medium mb-2">Gender</label>
+                    <select class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                           id="customerEmail" name="gender" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="customerPhone" class="block text-gray-300 font-medium mb-2">Phone Number</label>
+                    <input type="tel" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                           id="customerPhone" name="phone" required>
+                </div>
+                <div class="mb-4">
+                    <label for="customerPhone" class="block text-gray-300 font-medium mb-2">Address</label>
+                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                           id="customerPhone" name="address" required>
+                </div>
+                <div class="mb-4">
+                    <label for="customerImage" class="block text-gray-300 font-medium mb-2">Profile Image</label>
+                    <input type="file" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                           id="customerImage" name="image" required accept="image/*">
+                </div>
+            </div>
+            <div class="flex items-center justify-end gap-2 p-4 border-t border-gray-700">
+                <button type="button" class="px-4 py-2 border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-700 transition-colors" onclick="closeModal('addCustomerModal')">Cancel</button>
+                <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-80 transition-colors">Add Customer</button>
             </div>
         </form>
     </div>
@@ -221,6 +353,139 @@
             <div class="flex items-center justify-end gap-2 p-4 border-t border-gray-700">
                 <button type="button" class="px-4 py-2 border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-700 transition-colors" onclick="closeModal('deleteCustomerModal')">Cancel</button>
                 <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">Delete Customer</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- View Customer Details Modal -->
+<div id="viewCustomerModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-gray-800 text-white rounded-xl max-w-md w-full mx-4">
+        <div class="flex items-center justify-between p-4 border-b border-gray-700">
+            <h5 class="text-lg font-semibold">Customer Details</h5>
+            <button type="button" class="text-gray-400 hover:text-white transition-colors" onclick="closeModal('viewCustomerModal')">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="p-6">
+            <!-- Customer Profile Image -->
+            <div class="flex justify-center mb-6">
+                <div class="relative">
+                    <img id="viewCustomerImage" src="" alt="" class="w-24 h-24 rounded-full object-cover border-4 border-gray-700">
+                    <div class="absolute bottom-0 right-0 w-6 h-6 bg-green-500 rounded-full border-2 border-gray-800"></div>
+                </div>
+            </div>
+
+            <!-- Customer Information -->
+            <div class="space-y-4">
+                <div class="text-center">
+                    <h3 id="viewCustomerName" class="text-xl font-semibold text-white mb-1"></h3>
+                    <p id="viewCustomerId" class="text-sm text-gray-400"></p>
+                </div>
+
+                <div class="border-t border-gray-700 pt-4">
+                    <h6 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Contact Information</h6>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                            </svg>
+                            <span id="viewCustomerPhone" class="text-white"></span>
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span id="viewCustomerAddress" class="text-white"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-700 pt-4">
+                    <h6 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Personal Information</h6>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            <span class="text-gray-400 mr-2">Date of Birth:</span>
+                            <span id="viewCustomerDateOfBirth" class="text-white"></span>
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg>
+                            <span class="text-gray-400 mr-2">Gender:</span>
+                            <span id="viewCustomerGender" class="text-white"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex items-center justify-end gap-2 p-4 border-t border-gray-700">
+            <button type="button" class="px-4 py-2 border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-700 transition-colors" onclick="closeModal('viewCustomerModal')">Close</button>
+        </div>
+    </div>
+</div>
+
+<!-- Add Student Modal -->
+<div id="addStudentModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-gray-800 text-white rounded-xl max-w-md w-full mx-4">
+        <div class="flex items-center justify-between p-4 border-b border-gray-700">
+            <h5 class="text-lg font-semibold">Add New Student</h5>
+            <button type="button" class="text-gray-400 hover:text-white transition-colors" onclick="closeModal('addStudentModal')">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        <form method="POST" action="actions/add_student.php" enctype="multipart/form-data">
+            <div class="p-4">
+                <div class="mb-4">
+                    <label for="studentName" class="block text-gray-300 font-medium mb-2">Full Name</label>
+                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                           id="studentName" name="name" required>
+                </div>
+                <div class="mb-4">
+                    <label for="studentEmail" class="block text-gray-300 font-medium mb-2">Date of Birth</label>
+                    <input type="date" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                           id="studentEmail" name="dateOfBirth" required>
+                </div>
+                <div class="mb-4">
+                    <label for="studentEmail" class="block text-gray-300 font-medium mb-2">Gender</label>
+                    <select class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                           id="studentEmail" name="gender" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="studentPhone" class="block text-gray-300 font-medium mb-2">Phone Number</label>
+                    <input type="tel" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                           id="studentPhone" name="phone" required>
+                </div>
+                 <div class="mb-4">
+                    <label for="studentEmail" class="block text-gray-300 font-medium mb-2">Email</label>
+                    <input type="email" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                           id="studentEmail" name="email" required>
+                </div>
+                <div class="mb-4">
+                    <label for="studentAddress" class="block text-gray-300 font-medium mb-2">Address</label>
+                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                           id="studentAddress" name="address" required>
+                </div>
+                <div class="mb-4">
+                    <label for="studentImage" class="block text-gray-300 font-medium mb-2">Profile Image</label>
+                    <input type="file" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                           id="studentImage" name="image" required accept="image/*">
+                </div>
+            </div>
+            <div class="flex items-center justify-end gap-2 p-4 border-t border-gray-700">
+                <button type="button" class="px-4 py-2 border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-700 transition-colors" onclick="closeModal('addStudentModal')">Cancel</button>
+                <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-80 transition-colors">Add Student</button>
             </div>
         </form>
     </div>
@@ -322,135 +587,81 @@
     </div>
 </div>
 
-<!-- Add Customer Modal -->
-<div id="addCustomerModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+<!-- View Student Details Modal -->
+<div id="viewStudentModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
     <div class="bg-gray-800 text-white rounded-xl max-w-md w-full mx-4">
         <div class="flex items-center justify-between p-4 border-b border-gray-700">
-            <h5 class="text-lg font-semibold">Add New Customer</h5>
-            <button type="button" class="text-gray-400 hover:text-white transition-colors" onclick="closeModal('addCustomerModal')">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-            </button>
-        </div>
-        <form method="POST" action="actions/add_customer.php" enctype="multipart/form-data">
-            <div class="p-4">
-                <div class="mb-4">
-                    <label for="customerName" class="block text-gray-300 font-medium mb-2">Full Name</label>
-                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="customerName" name="name" required>
-                </div>
-                <div class="mb-4">
-                    <label for="customerEmail" class="block text-gray-300 font-medium mb-2">Date of Birth</label>
-                    <input type="date" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="customerEmail" name="dateOfBirth" required>
-                </div>
-                <div class="mb-4">
-                    <label for="customerEmail" class="block text-gray-300 font-medium mb-2">Gender</label>
-                    <select class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="customerEmail" name="gender" required>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <label for="customerPhone" class="block text-gray-300 font-medium mb-2">Phone Number</label>
-                    <input type="tel" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="customerPhone" name="phone" required>
-                </div>
-                <div class="mb-4">
-                    <label for="customerPhone" class="block text-gray-300 font-medium mb-2">Address</label>
-                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="customerPhone" name="address" required>
-                </div>
-                <div class="mb-4">
-                    <label for="customerImage" class="block text-gray-300 font-medium mb-2">Profile Image</label>
-                    <input type="file" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="customerImage" name="image" required accept="image/*">
-                </div>
-            </div>
-            <div class="flex items-center justify-end gap-2 p-4 border-t border-gray-700">
-                <button type="button" class="px-4 py-2 border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-700 transition-colors" onclick="closeModal('addCustomerModal')">Cancel</button>
-                <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-80 transition-colors">Add Customer</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<!-- View Order Details Modal -->
-<div id="viewOrderDetailsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-    <div class="bg-gray-800 text-white rounded-xl max-w-md w-full mx-4">
-        <div class="flex items-center justify-between p-4 border-b border-gray-700">
-            <h5 class="text-lg font-semibold">Order Details</h5>
-            <button type="button" class="text-gray-400 hover:text-white transition-colors" onclick="closeModal('viewOrderDetailsModal')">
+            <h5 class="text-lg font-semibold">Student Details</h5>
+            <button type="button" class="text-gray-400 hover:text-white transition-colors" onclick="closeModal('viewStudentModal')">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
         </div>
         <div class="p-6">
-            <!-- Order Information -->
-            <div class="mb-6">
-                <h6 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Order Information</h6>
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <p class="text-sm text-gray-400">Order ID</p>
-                        <p class="text-white font-semibold" id="viewOrderId"></p>
-                    </div>
-                    <div>
-                        <p class="text-sm text-gray-400">Customer</p>
-                        <p class="text-white font-semibold" id="viewOrderCustomer"></p>
-                    </div>
+            <!-- Student Profile Image -->
+            <div class="flex justify-center mb-6">
+                <div class="relative">
+                    <img id="viewStudentImage" src="" alt="" class="w-24 h-24 rounded-full object-cover border-4 border-gray-700">
+                    <div class="absolute bottom-0 right-0 w-6 h-6 bg-blue-500 rounded-full border-2 border-gray-800"></div>
                 </div>
             </div>
 
-            <!-- Order Items -->
-            <div class="mb-6">
-                <h6 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Products</h6>
-                <div class="space-y-3" id="viewOrderItems">
-                    <!-- Items will be populated by JavaScript -->
+            <!-- Student Information -->
+            <div class="space-y-4">
+                <div class="text-center">
+                    <h3 id="viewStudentName" class="text-xl font-semibold text-white mb-1"></h3>
+                    <p id="viewStudentId" class="text-sm text-gray-400"></p>
                 </div>
-            </div>
 
-            <!-- Order Total -->
-            <div class="border-t border-gray-700 pt-4">
-                <div class="flex justify-between items-center">
-                    <span class="text-lg font-semibold text-white">Total:</span>
-                    <span class="text-xl font-bold text-primary" id="viewOrderTotal"></span>
+                <div class="border-t border-gray-700 pt-4">
+                    <h6 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Contact Information</h6>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            <span id="viewStudentEmail" class="text-white"></span>
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                            </svg>
+                            <span id="viewStudentPhone" class="text-white"></span>
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span id="viewStudentAddress" class="text-white"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-700 pt-4">
+                    <h6 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Personal Information</h6>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            <span class="text-gray-400 mr-2">Date of Birth:</span>
+                            <span id="viewStudentDateOfBirth" class="text-white"></span>
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg>
+                            <span class="text-gray-400 mr-2">Gender:</span>
+                            <span id="viewStudentGender" class="text-white"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="flex items-center justify-end gap-2 p-4 border-t border-gray-700">
-
-                <!-- Additional Fields (Hidden for now, can be expanded) -->
-                <div class="mb-4">
-                    <label for="orderAddress" class="block text-gray-300 font-medium mb-2">Shipping Address</label>
-                    <textarea class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                              id="orderAddress" name="address" rows="3" placeholder="Enter shipping address"></textarea>
-                </div>
-                <div class="mb-4">
-                    <label for="orderPayment" class="block text-gray-300 font-medium mb-2">Payment Method</label>
-                    <select class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                            id="orderPayment" name="paymentMethod">
-                        <option value="">Select Payment Method</option>
-                        <option value="credit_card">Credit Card</option>
-                        <option value="debit_card">Debit Card</option>
-                        <option value="paypal">PayPal</option>
-                        <option value="cash_on_delivery">Cash on Delivery</option>
-                        <option value="bank_transfer">Bank Transfer</option>
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <label for="orderNotes" class="block text-gray-300 font-medium mb-2">Order Notes</label>
-                    <textarea class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                              id="orderNotes" name="notes" rows="2" placeholder="Additional order notes (optional)"></textarea>
-                </div>
-            </div>
-            <div class="flex items-center justify-end gap-2 p-4 border-t border-gray-700">
-                <button type="button" class="px-4 py-2 border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-700 transition-colors" onclick="closeModal('addOrderModal')">Cancel</button>
-                <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-80 transition-colors">Add Order</button>
-            </div>
-        </form>
+            <button type="button" class="px-4 py-2 border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-700 transition-colors" onclick="closeModal('viewStudentModal')">Close</button>
+        </div>
     </div>
 </div>
-

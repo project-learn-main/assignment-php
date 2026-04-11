@@ -25,10 +25,11 @@ function closeModal(modalId) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Handle hash in URL to switch tabs
-  const hash = window.location.hash.substring(1);
-  if (hash) {
-    const targetLink = document.querySelector(`[data-tab="${hash}"]`);
+  // Handle URL parameter to switch tabs
+  const urlParams = new URLSearchParams(window.location.search);
+  const tab = urlParams.get("tab");
+  if (tab) {
+    const targetLink = document.querySelector(`[data-tab="${tab}"]`);
     if (targetLink) {
       targetLink.click();
     }
@@ -298,4 +299,103 @@ function deleteStudent(studentId) {
   document.getElementById("deleteStudentInfo").textContent = studentInfo;
 
   openModal("deleteStudentModal");
+}
+
+function viewCustomer(customerId) {
+  const row = document.querySelector(`tr[data-customer-id="${customerId}"]`);
+  if (!row) return;
+
+  const cells = row.querySelectorAll("td");
+  const id = cells[0].textContent;
+  const name = cells[1].textContent;
+  const phone = cells[2].textContent;
+  const imageSrc = cells[3].querySelector("img").src;
+
+  // Fetch full customer data from PHP session
+  fetch(`../data/customers.php?action=get&id=${customerId}`)
+    .then((response) => response.json())
+    .then((customer) => {
+      if (customer) {
+        document.getElementById("viewCustomerId").textContent =
+          "ID: " + customer.id;
+        document.getElementById("viewCustomerName").textContent = customer.name;
+        document.getElementById("viewCustomerPhone").textContent =
+          customer.phone;
+        document.getElementById("viewCustomerImage").src =
+          customer.image || imageSrc;
+        document.getElementById("viewCustomerImage").alt = customer.name;
+        document.getElementById("viewCustomerDateOfBirth").textContent =
+          customer.dateOfBirth;
+        document.getElementById("viewCustomerGender").textContent =
+          customer.gender;
+        document.getElementById("viewCustomerAddress").textContent =
+          customer.address;
+
+        openModal("viewCustomerModal");
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching customer data:", error);
+      // Fallback to basic data
+      document.getElementById("viewCustomerId").textContent = "ID: " + id;
+      document.getElementById("viewCustomerName").textContent = name;
+      document.getElementById("viewCustomerPhone").textContent = phone;
+      document.getElementById("viewCustomerImage").src = imageSrc;
+      document.getElementById("viewCustomerImage").alt = name;
+      document.getElementById("viewCustomerDateOfBirth").textContent = "N/A";
+      document.getElementById("viewCustomerGender").textContent = "N/A";
+      document.getElementById("viewCustomerAddress").textContent = "N/A";
+
+      openModal("viewCustomerModal");
+    });
+}
+
+function viewStudent(studentId) {
+  const row = document.querySelector(`tr[data-student-id="${studentId}"]`);
+  if (!row) return;
+
+  const cells = row.querySelectorAll("td");
+  const id = cells[0].textContent;
+  const name = cells[1].textContent;
+  const email = cells[2].textContent;
+  const imageSrc = cells[3].querySelector("img").src;
+
+  // Fetch full student data from PHP session
+  fetch(`../data/students.php?action=get&id=${studentId}`)
+    .then((response) => response.json())
+    .then((student) => {
+      if (student) {
+        document.getElementById("viewStudentId").textContent =
+          "ID: " + student.id;
+        document.getElementById("viewStudentName").textContent = student.name;
+        document.getElementById("viewStudentEmail").textContent = student.email;
+        document.getElementById("viewStudentImage").src =
+          student.image || imageSrc;
+        document.getElementById("viewStudentImage").alt = student.name;
+        document.getElementById("viewStudentPhone").textContent = student.phone;
+        document.getElementById("viewStudentDateOfBirth").textContent =
+          student.dateOfBirth;
+        document.getElementById("viewStudentGender").textContent =
+          student.gender;
+        document.getElementById("viewStudentAddress").textContent =
+          student.address;
+
+        openModal("viewStudentModal");
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching student data:", error);
+      // Fallback to basic data
+      document.getElementById("viewStudentId").textContent = "ID: " + id;
+      document.getElementById("viewStudentName").textContent = name;
+      document.getElementById("viewStudentEmail").textContent = email;
+      document.getElementById("viewStudentImage").src = imageSrc;
+      document.getElementById("viewStudentImage").alt = name;
+      document.getElementById("viewStudentPhone").textContent = "N/A";
+      document.getElementById("viewStudentDateOfBirth").textContent = "N/A";
+      document.getElementById("viewStudentGender").textContent = "N/A";
+      document.getElementById("viewStudentAddress").textContent = "N/A";
+
+      openModal("viewStudentModal");
+    });
 }

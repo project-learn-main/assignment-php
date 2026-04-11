@@ -1,3 +1,10 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+include_once __DIR__ . '/../../data/students.php';
+?>
+
 <!-- Header -->
 <div class="h-full">
     <div class="bg-gray-800 px-6 py-8">
@@ -43,159 +50,41 @@
         <table class="w-full text-white">
             <thead>
                 <tr class="border-b border-gray-700">
-                    <th class="text-left py-3 px-6 font-medium text-gray-300">Student ID</th>
+                    <th class="text-left py-3 px-6 font-medium text-gray-300">ID</th>
                     <th class="text-left py-3 px-6 font-medium text-gray-300">Name</th>
                     <th class="text-left py-3 px-6 font-medium text-gray-300">Email</th>
-                    <th class="text-left py-3 px-6 font-medium text-gray-300">Phone</th>
-                    <th class="text-left py-3 px-6 font-medium text-gray-300">Gender</th>
-                    <th class="text-left py-3 px-6 font-medium text-gray-300">Address</th>
-                    <th class="text-left py-3 px-6 font-medium text-gray-300">Status</th>
                     <th class="text-left py-3 px-6 font-medium text-gray-300">Image</th>
                     <th class="text-center py-3 px-6 font-medium text-gray-300">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="border-b border-gray-800 hover:bg-gray-800 transition-colors" data-student-id="STU001">
-                    <td class="py-3 px-6 font-semibold">STU001</td>
-                    <td class="py-3 px-6">Alice Johnson</td>
-                    <td class="py-3 px-6">alice.j@school.edu</td>
-                    <td class="py-3 px-6">123-456-7890</td>
-                    <td class="py-3 px-6">Female</td>
-                    <td class="py-3 px-6">123 Main St, City, State</td>
-                    <td class="py-3 px-6">
-                        <span class="inline-block px-2 py-1 text-xs font-semibold text-white rounded-full bg-green-500">
-                            Active
-                        </span>
-                    </td>
-                    <td class="py-3 px-6">
-                        <img src="https://via.placeholder.com/50" alt="Student Image" class="w-12 h-12 rounded-full">
-                    </td>
-                    <td class="py-3 px-6">
-                        <span class="inline-block px-2 py-1 text-xs font-semibold text-white rounded-full bg-green-500">
-                            3.8
-                        </span>
-                    </td>
-                    <td class="py-3 px-6">2022-09-01</td>
-                    <td class="py-3 px-6">
-                        <span class="inline-block px-2 py-1 text-xs font-semibold text-white rounded-full bg-green-500">
-                            Active
-                        </span>
-                    </td>
-                    <td class="py-3 px-6">
-                        <div class="flex justify-center gap-2">
-                            <button class="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded transition-colors">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                                </svg>
-                            </button>
-                            <button class="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded transition-colors" onclick="updateStudent('STU001')">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                                </svg>
-                            </button>
-                            <button class="p-2 text-gray-400 hover:text-red-400 hover:bg-gray-700 rounded transition-colors" onclick="deleteStudent('STU001')">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="border-b border-gray-800 hover:bg-gray-800 transition-colors" data-student-id="STU002">
-                    <td class="py-3 px-6 font-semibold">STU002</td>
-                    <td class="py-3 px-6">Bob Smith</td>
-                    <td class="py-3 px-6">bob.smith@school.edu</td>
-                    <td class="py-3 px-6">123-456-7890</td>
-                    <td class="py-3 px-6">Male</td>
-                    <td class="py-3 px-6">123 Main St, City, State</td>
-                    <td class="py-3 px-6">
-                        <span class="inline-block px-2 py-1 text-xs font-semibold text-white rounded-full bg-green-500">
-                            Active
-                        </span>
-                    </td>
-                    <td class="py-3 px-6">
-                        <img src="https://via.placeholder.com/50" alt="Student Image" class="w-12 h-12 rounded-full">
-                    </td>
-                    <td class="py-3 px-6">
-                        <span class="inline-block px-2 py-1 text-xs font-semibold text-white rounded-full bg-primary">
-                            3.5
-                        </span>
-                    </td>
-                    <td class="py-3 px-6">2023-09-01</td>
-                    <td class="py-3 px-6">
-                        <span class="inline-block px-2 py-1 text-xs font-semibold text-white rounded-full bg-green-500">
-                            Active
-                        </span>
-                    </td>
-                    <td class="py-3 px-6">
-                        <div class="flex justify-center gap-2">
-                            <button class="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded transition-colors">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                                </svg>
-                            </button>
-                            <button class="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded transition-colors" onclick="updateStudent('STU002')">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                                </svg>
-                            </button>
-                            <button class="p-2 text-gray-400 hover:text-red-400 hover:bg-gray-700 rounded transition-colors" onclick="deleteStudent('STU002')">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="border-b border-gray-800 hover:bg-gray-800 transition-colors" data-student-id="STU003">
-                    <td class="py-3 px-6 font-semibold">STU003</td>
-                    <td class="py-3 px-6">Carol Williams</td>
-                    <td class="py-3 px-6">carol.w@school.edu</td>
-                    <td class="py-3 px-6">123-456-7890</td>
-                    <td class="py-3 px-6">Female</td>
-                    <td class="py-3 px-6">123 Main St, City, State</td>
-                    <td class="py-3 px-6">
-                        <span class="inline-block px-2 py-1 text-xs font-semibold text-white rounded-full bg-green-500">
-                            Active
-                        </span>
-                    </td>
-                    <td class="py-3 px-6">
-                        <img src="https://via.placeholder.com/50" alt="Student Image" class="w-12 h-12 rounded-full">
-                    </td>
-                    <td class="py-3 px-6">
-                        <span class="inline-block px-2 py-1 text-xs font-semibold text-white rounded-full bg-green-500">
-                            3.9
-                        </span>
-                    </td>
-                    <td class="py-3 px-6">2021-09-01</td>
-                    <td class="py-3 px-6">
-                        <span class="inline-block px-2 py-1 text-xs font-semibold text-white rounded-full bg-green-500">
-                            Active
-                        </span>
-                    </td>
-                    <td class="py-3 px-6">
-                        <div class="flex justify-center gap-2">
-                            <button class="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded transition-colors">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                                </svg>
-                            </button>
-                            <button class="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded transition-colors" onclick="updateStudent('STU003')">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                                </svg>
-                            </button>
-                            <button class="p-2 text-gray-400 hover:text-red-400 hover:bg-gray-700 rounded transition-colors" onclick="deleteStudent('STU003')">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+                <?php 
+                $students = $_SESSION['students']; 
+                foreach ($students as $student) {
+                    echo '<tr class="border-b border-gray-800 hover:bg-gray-800 transition-colors" data-student-id="' . $student['id'] . '">';
+                    echo '<td class="py-3 px-6 font-semibold">' . $student['id'] . '</td>';
+                    echo '<td class="py-3 px-6">' . $student['name'] . '</td>';
+                    echo '<td class="py-3 px-6">' . $student['email'] . '</td>';
+                    echo '<td class="py-3 px-6">';
+                    echo '<img src="' . $student['image'] . '" alt="' . $student['name'] . '" class="w-12 h-12 rounded-full">';
+                    echo '</td>';
+                    echo '<td class="py-3 px-6 text-center">';
+                    echo '<button class="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded transition-colors" onclick="viewStudent(\'' . $student['id'] . '\')">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                    </svg>
+                                </button>';
+                    echo '<button class="px-3 py-1 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">Edit</button>';
+                    echo '<button class="p-2 text-gray-400 hover:text-red-400 hover:bg-gray-700 rounded transition-colors" onclick="deleteStudent(\'' . $student['id'] . '\')">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                    </svg>
+                                </button>';
+                    echo '</td>';
+                    echo '</tr>';
+                }
+                ?>
             </tbody>
         </table>
     </div>

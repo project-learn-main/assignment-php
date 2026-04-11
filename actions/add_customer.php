@@ -7,6 +7,8 @@ if(isset($_POST['name']) && isset($_POST['dateOfBirth']) && isset($_POST['gender
     $gender = $_POST['gender'];
     $address = $_POST['address'];
     $phone = $_POST['phone'];
+   
+    
     $picture = $_FILES['image'];
     $path = __DIR__ . '/../images';
     

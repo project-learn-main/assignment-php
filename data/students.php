@@ -1,58 +1,135 @@
 <?php
+
 $dataStudents = [
     [
-        'studentId' => 'STU001', 
+        'id' => 'STU001', 
         'name' => 'Alice Johnson', 
         'email' => 'alice.j@school.edu', 
-        'course' => 'Computer Science',
-        'year' => '3rd Year',
-        'gpa' => 3.8,
-        'enrollmentDate' => '2022-09-01',
-        'status' => 'Active'
+        'phone' => '123-456-7890',
+        'gender' => 'Female',
+        'address' => '123 Main St, City, State',
+        'dateOfBirth' => '1998-03-15',
+        'image' => 'https://via.placeholder.com/50'
     ],
     [
-        'studentId' => 'STU002', 
+        'id' => 'STU002', 
         'name' => 'Bob Smith', 
         'email' => 'bob.s@school.edu', 
-        'course' => 'Business Administration',
-        'year' => '2nd Year',
-        'gpa' => 3.5,
-        'enrollmentDate' => '2023-01-15',
-        'status' => 'Active'
+        'phone' => '123-456-7890',
+        'gender' => 'Male',
+        'address' => '123 Main St, City, State',
+        'dateOfBirth' => '1997-07-22',
+        'image' => 'https://via.placeholder.com/50'
     ],
     [
-        'studentId' => 'STU003', 
+        'id' => 'STU003', 
         'name' => 'Charlie Davis', 
         'email' => 'charlie.d@school.edu', 
-        'course' => 'Engineering',
-        'year' => '4th Year',
-        'gpa' => 3.2,
-        'enrollmentDate' => '2021-08-20',
-        'status' => 'Active'
+        'phone' => '123-456-7890',
+        'gender' => 'Male',
+        'address' => '123 Main St, City, State',
+        'dateOfBirth' => '1999-01-10',
+        'image' => 'https://via.placeholder.com/50'
     ],
-    [
-        'studentId' => 'STU004', 
-        'name' => 'Diana Wilson', 
-        'email' => 'diana.w@school.edu', 
-        'course' => 'Computer Science',
-        'year' => '1st Year',
-        'gpa' => 3.9,
-        'enrollmentDate' => '2023-09-10',
-        'status' => 'Active'
-    ],
-    [
-        'studentId' => 'STU005', 
-        'name' => 'Eva Brown', 
-        'email' => 'eva.b@school.edu', 
-        'course' => 'Business Administration',
-        'year' => '2nd Year',
-        'gpa' => 3.7,
-        'enrollmentDate' => '2022-01-05',
-        'status' => 'Inactive'
-    ]
+    // [
+    //     'id' => 'STU004', 
+    //     'name' => 'Diana Wilson', 
+    //     'email' => 'diana.w@school.edu', 
+    //     'phone' => '123-456-7890',
+    //     'gender' => 'Female',
+    //     'address' => '123 Main St, City, State',
+    //     'dateOfBirth' => '1998-05-30',
+    //     'image' => 'https://via.placeholder.com/50'
+    // ],
+    // [
+    //     'id' => 'STU005', 
+    //     'name' => 'Eva Brown', 
+    //     'email' => 'eva.b@school.edu', 
+    //     'phone' => '123-456-7890',
+    //     'gender' => 'Female',
+    //     'address' => '123 Main St, City, State',
+    //     'dateOfBirth' => '1997-09-12',
+    //     'image' => 'https://via.placeholder.com/50'
+    // ],
+    // [
+    //     'id' => 'STU006', 
+    //     'name' => 'Frank Miller', 
+    //     'email' => 'frank.m@school.edu', 
+    //     'phone' => '123-456-7890',
+    //     'gender' => 'Male',
+    //     'address' => '123 Main St, City, State',
+    //     'dateOfBirth' => '1999-11-25',
+    //     'image' => 'https://via.placeholder.com/50'
+    // ],
+    // [
+    //     'id' => 'STU007', 
+    //     'name' => 'Grace Lee', 
+    //     'email' => 'grace.l@school.edu', 
+    //     'phone' => '123-456-7890',
+    //     'gender' => 'Female',
+    //     'address' => '123 Main St, City, State',
+    //     'dateOfBirth' => '1998-08-18',
+    //     'image' => 'https://via.placeholder.com/50'
+    // ],
+    // [
+    //     'id' => 'STU008', 
+    //     'name' => 'Henry Taylor', 
+    //     'email' => 'henry.t@school.edu', 
+    //     'phone' => '123-456-7890',
+    //     'gender' => 'Male',
+    //     'address' => '123 Main St, City, State',
+    //     'dateOfBirth' => '1997-04-05',
+    //     'image' => 'https://via.placeholder.com/50'
+    // ],
+    // [
+    //     'id' => 'STU009', 
+    //     'name' => 'Ivy Chen', 
+    //     'email' => 'ivy.c@school.edu', 
+    //     'phone' => '123-456-7890',
+    //     'gender' => 'Female',
+    //     'address' => '123 Main St, City, State',
+    //     'dateOfBirth' => '1999-12-20',
+    //     'image' => 'https://via.placeholder.com/50'
+    // ],
+    // [
+    //     'id' => 'STU010', 
+    //     'name' => 'Jack White', 
+    //     'email' => 'jack.w@school.edu', 
+    //     'phone' => '123-456-7890',
+    //     'gender' => 'Male',
+    //     'address' => '123 Main St, City, State',
+    //     'dateOfBirth' => '1998-06-14',
+    //     'image' => 'https://via.placeholder.com/50'
+    // ]
+
 ];
+
 if (!isset($_SESSION['students'])) {
     $_SESSION['students'] = $dataStudents;
+}
+
+// Handle API requests
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
+    if ($_GET['action'] === 'get' && isset($_GET['id'])) {
+        $studentId = $_GET['id'];
+        $students = $_SESSION['students'];
+        
+        $foundStudent = null;
+        foreach ($students as $student) {
+            if ($student['id'] === $studentId) {
+                $foundStudent = $student;
+                break;
+            }
+        }
+        
+        header('Content-Type: application/json');
+        if ($foundStudent) {
+            echo json_encode($foundStudent);
+        } else {
+            echo json_encode(null);
+        }
+        exit;
+    }
 }
 
 ?>
