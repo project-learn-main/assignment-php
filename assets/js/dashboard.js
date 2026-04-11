@@ -66,6 +66,9 @@ document.addEventListener("DOMContentLoaded", function () {
         targetContent.classList.remove("hidden");
         targetContent.classList.add("block");
       }
+
+      // Save tab state to session
+      saveTabState(targetTab);
     });
   });
 
@@ -347,6 +350,28 @@ function viewCustomer(customerId) {
       document.getElementById("viewCustomerAddress").textContent = "N/A";
 
       openModal("viewCustomerModal");
+    });
+}
+
+// Function to save tab state to session
+function saveTabState(tab) {
+  fetch("../actions/save_tab.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ tab: tab }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        console.log("Tab state saved:", data.tab);
+      } else {
+        console.error("Failed to save tab state:", data.error);
+      }
+    })
+    .catch((error) => {
+      console.error("Error saving tab state:", error);
     });
 }
 
