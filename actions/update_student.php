@@ -4,15 +4,15 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     $studentId = $_POST['id'];
     
-    
-    $imagePath = ''; // Keep old image by default
-    if (isset($_FILES['personal_image']) && $_FILES['personal_image']['error'] === UPLOAD_ERR_OK) {
-        $file = $_FILES['personal_image'];
+
+    $imagePath = null; // Will keep old image if null
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        $file = $_FILES['image'];
         $uploadDir = __DIR__ . '/../images';
         
         // Create upload directory if it doesn't exist
         if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
+            mkdir($uploadDir);
         }
         
         // Generate unique filename
@@ -35,8 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
         'address' => $_POST['address'],
         'status' => $_POST['status'],
         'image' => $imagePath,
-        // Preserve fields not in form
-        'dateOfBirth' => isset($existingStudent['dateOfBirth']) ? $existingStudent['dateOfBirth'] : ''
+        'dateOfBirth' => $_POST['dateOfBirth']
     ];
     
     // Find and update student in session

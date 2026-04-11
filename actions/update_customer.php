@@ -3,9 +3,7 @@ session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     $customerId = $_POST['id'];
-    
-   
-    
+
     // Handle image upload
     $imagePath = null; // Will keep old image if null
     if (isset($_FILES['personal_image']) && $_FILES['personal_image']['error'] === UPLOAD_ERR_OK) {
@@ -14,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
         
         // Create upload directory if it doesn't exist
         if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
+            mkdir($uploadDir);
         }
         
         // Generate unique filename
