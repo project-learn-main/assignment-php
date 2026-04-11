@@ -4,9 +4,10 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     $customerId = $_POST['id'];
     
+   
     
     // Handle image upload
-    $imagePath = isset($existingCustomer['image']) ? $existingCustomer['image'] : ''; // Keep old image by default
+    $imagePath = null; // Will keep old image if null
     if (isset($_FILES['personal_image']) && $_FILES['personal_image']['error'] === UPLOAD_ERR_OK) {
         $file = $_FILES['personal_image'];
         $uploadDir = __DIR__ . '/../images';
@@ -40,6 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     if (isset($_SESSION['customers'])) {
         foreach ($_SESSION['customers'] as $key => $customer) {
             if ($customer['id'] == $customerId) {
+                // Keep old image if no new image was uploaded
+                if ($imagePath === null) {
+                    $updatedData['image'] = $customer['image'];
+                }
                 $_SESSION['customers'][$key] = $updatedData;
                 break;
             }
