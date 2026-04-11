@@ -4,29 +4,6 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     $customerId = $_POST['id'];
     
-    // Debug: Log POST data
-    error_log("Updating customer: ID=$customerId");
-    error_log("POST data received: " . print_r($_POST, true));
-    
-    // Get existing customer data
-    $existingCustomer = null;
-    if (isset($_SESSION['customers'])) {
-        error_log("Session customers count: " . count($_SESSION['customers']));
-        foreach ($_SESSION['customers'] as $customer) {
-            error_log("Checking customer: id={$customer['id']}, name={$customer['name']}");
-            if ($customer['id'] == $customerId) {
-                $existingCustomer = $customer;
-                error_log("Found matching customer: " . print_r($existingCustomer, true));
-                break;
-            }
-        }
-    } else {
-        error_log("Session customers not found");
-    }
-    
-    if (!$existingCustomer) {
-        error_log("Customer not found with id: $customerId");
-    }
     
     // Handle image upload
     $imagePath = isset($existingCustomer['image']) ? $existingCustomer['image'] : ''; // Keep old image by default
