@@ -1,4 +1,5 @@
 <?php
+
 $customer = [
     [
         'id' => '1', 
@@ -96,7 +97,6 @@ if (!isset($_SESSION['customers'])) {
     $_SESSION['customers'] = $customer;
 }
 
-// Handle API requests
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
     if ($_GET['action'] === 'get' && isset($_GET['id'])) {
         $customerId = $_GET['id'];

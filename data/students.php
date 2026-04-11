@@ -1,41 +1,56 @@
 <?php
-
+ 
 $dataStudents = [
     [
-        'id' => 'STU001', 
+        'id' => 1, 
         'name' => 'Alice Johnson', 
         'email' => 'alice.j@school.edu', 
         'phone' => '123-456-7890',
-        'gender' => 'Female',
+        'gender' => 'Nü',
         'address' => '123 Main St, City, State',
-        'dateOfBirth' => '1998-03-15',
-        'image' => 'https://via.placeholder.com/50'
+        'status' => 'Đang học',
+        'image' => 'https://via.placeholder.com/50',
+        'studentId' => 'STU001'
     ],
     [
-        'id' => 'STU002', 
+        'id' => 2, 
         'name' => 'Bob Smith', 
         'email' => 'bob.s@school.edu', 
         'phone' => '123-456-7890',
-        'gender' => 'Male',
-        'address' => '123 Main St, City, State',
-        'dateOfBirth' => '1997-07-22',
-        'image' => 'https://via.placeholder.com/50'
+        'gender' => 'Nam',
+        'address' => '456 Oak Ave, City, State',
+        'status' => 'Đang học',
+        'image' => 'https://via.placeholder.com/50',
+        'studentId' => 'STU002'
     ],
     [
-        'id' => 'STU003', 
+        'id' => 3, 
         'name' => 'Charlie Davis', 
         'email' => 'charlie.d@school.edu', 
         'phone' => '123-456-7890',
-        'gender' => 'Male',
+        'gender' => 'Nam',
+        'address' => '789 Pine St, City, State',
+        'status' => 'Bảo lưu',
+        'image' => 'https://via.placeholder.com/50',
+        'studentId' => 'STU003'
+    ],
+    [
+        'id' => 4, 
+        'name' => 'Diana Wilson', 
+        'email' => 'diana.w@school.edu', 
+        'phone' => '123-456-7890',
+        'gender' => 'Nü',
         'address' => '123 Main St, City, State',
-        'dateOfBirth' => '1999-01-10',
-        'image' => 'https://via.placeholder.com/50'
+        'status' => 'Thôi học',
+        'image' => 'https://via.placeholder.com/50',
+        'studentId' => 'STU004'
     ],
     // [
     //     'id' => 'STU004', 
     //     'name' => 'Diana Wilson', 
     //     'email' => 'diana.w@school.edu', 
     //     'phone' => '123-456-7890',
+    //     'gender' => 'Nữ',
     //     'gender' => 'Female',
     //     'address' => '123 Main St, City, State',
     //     'dateOfBirth' => '1998-05-30',
@@ -110,6 +125,9 @@ if (!isset($_SESSION['students'])) {
 
 // Handle API requests
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
     if ($_GET['action'] === 'get' && isset($_GET['id'])) {
         $studentId = $_GET['id'];
         $students = $_SESSION['students'];

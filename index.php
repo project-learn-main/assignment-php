@@ -3,6 +3,11 @@
     if(!isset($_COOKIE['email'])) {
         header('Location: auth/signin.php');
     }
+    
+    // Include data files to initialize session data
+    include_once 'data/customers.php';
+    include_once 'data/students.php';
+    include_once 'data/orders.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

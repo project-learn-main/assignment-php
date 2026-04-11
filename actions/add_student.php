@@ -18,8 +18,9 @@ if(isset($_POST['name']) && isset($_POST['dateOfBirth']) && isset($_POST['gender
 
     $targetPath = $path . '/' . $picture['name'];
     if (move_uploaded_file($picture['tmp_name'], $targetPath)) {
-        $_SESSION['students'][] = [
+        $newStudent = [
      'id' => count($_SESSION['students']) + 1,
+    'studentId' => 'STU' . str_pad(count($_SESSION['students']) + 1, 3, '0', STR_PAD_LEFT),
     'name' => $name,
     'dateOfBirth' => $dateOfBirth,
     'gender' => $gender,
@@ -27,7 +28,13 @@ if(isset($_POST['name']) && isset($_POST['dateOfBirth']) && isset($_POST['gender
     'email' => $email,
     'address' => $address,
     'image' => 'images/' . $picture['name'],
+    'status' => 'Đang học'
 ];
+        $_SESSION['students'][] = $newStudent;
+        
+        // Debug: Log new student added
+        error_log("New student added: " . print_r($newStudent, true));
+        error_log("Total students in session: " . count($_SESSION['students']));
 } 
 
 

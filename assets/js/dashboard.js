@@ -245,18 +245,36 @@ function deleteOrder(orderId) {
 }
 
 function updateCustomer(customerId) {
+  // Get customer data from table row
   const row = document.querySelector(`tr[data-customer-id="${customerId}"]`);
   if (!row) return;
 
   const cells = row.querySelectorAll("td");
-  const name = cells[1].textContent;
-  const email = cells[2].textContent;
-  const phone = cells[3].textContent;
+  const id = cells[0].textContent; // ID
+  const name = cells[1].textContent; // Tên khách hàng
+  const phone = cells[2].textContent; // Sô diên thoai
+  const dateOfBirth = cells[3].textContent; // Ngày sinh
+  const gender = cells[4].textContent; // Giói tính
+  const address = cells[5].textContent; // Dia chi
 
-  document.getElementById("updateCustomerId").value = customerId;
+  // Populate update modal with table data
+  document.getElementById("updateCustomerId").value = id;
   document.getElementById("updateCustomerName").value = name;
-  document.getElementById("updateCustomerEmail").value = email;
   document.getElementById("updateCustomerPhone").value = phone;
+  document.getElementById("updateCustomerDateOfBirth").value = dateOfBirth;
+  document.getElementById("updateCustomerGender").value = gender;
+  document.getElementById("updateCustomerAddress").value = address;
+
+  // Get image src from img element in cell 7
+  const imageCell = cells[6];
+  const imgElement = imageCell.querySelector("img");
+  const imageSrc = imgElement ? imgElement.src : "";
+
+  // Display current image in modal
+  document.getElementById("currentCustomerImage").src =
+    imageSrc || "https://via.placeholder.com/50";
+  document.getElementById("currentCustomerImagePath").textContent =
+    imageSrc || "No image";
 
   openModal("updateCustomerModal");
 }
@@ -273,22 +291,69 @@ function deleteCustomer(customerId) {
 }
 
 function updateStudent(studentId) {
+  // Get student data from table row
   const row = document.querySelector(`tr[data-student-id="${studentId}"]`);
   if (!row) return;
 
   const cells = row.querySelectorAll("td");
-  const name = cells[1].textContent;
-  const email = cells[2].textContent;
-  const course = cells[3].textContent;
-  const year = cells[4].textContent;
-  const gpa = cells[5].textContent.trim();
+  const id = cells[0].textContent; // Mã SV
+  const name = cells[1].textContent; // Tên SV
+  const email = cells[2].textContent; // Email
+  const phone = cells[3].textContent; // Sô diên thoai
+  const gender = cells[4].textContent; // Giói tính
+  const address = cells[5].textContent; // Quê quán
+  const status = cells[6].textContent; // Trang thái
 
+  // Debug: Log all cell values
+  console.log("All cell values in updateStudent:");
+  for (let i = 0; i < cells.length; i++) {
+    console.log(`Cell ${i}: "${cells[i].textContent}"`);
+  }
+  console.log(
+    "Extracted values - Gender:",
+    JSON.stringify(gender),
+    "Status:",
+    JSON.stringify(status),
+  );
+
+  // Populate update modal with table data
   document.getElementById("updateStudentId").value = studentId;
   document.getElementById("updateStudentName").value = name;
   document.getElementById("updateStudentEmail").value = email;
-  document.getElementById("updateStudentCourse").value = course;
-  document.getElementById("updateStudentYear").value = year;
-  document.getElementById("updateStudentGpa").value = gpa;
+  document.getElementById("updateStudentIdNum").value = id;
+  document.getElementById("updateStudentPhone").value = phone;
+  // Set gender select value manually
+  const genderSelect = document.getElementById("updateStudentGender");
+  console.log("Gender select options:");
+  for (let i = 0; i < genderSelect.options.length; i++) {
+    console.log(
+      `  Option ${i}: value="${genderSelect.options[i].value}", text="${genderSelect.options[i].text}"`,
+    );
+    genderSelect.options[i].selected = genderSelect.options[i].value === gender;
+  }
+
+  document.getElementById("updateStudentAddress").value = address;
+
+  // Set status select value manually
+  const statusSelect = document.getElementById("updateStudentStatus");
+  console.log("Status select options:");
+  for (let i = 0; i < statusSelect.options.length; i++) {
+    console.log(
+      `  Option ${i}: value="${statusSelect.options[i].value}", text="${statusSelect.options[i].text}"`,
+    );
+    statusSelect.options[i].selected = statusSelect.options[i].value === status;
+  }
+
+  // Get image src from img element in cell 8
+  const imageCell = cells[7];
+  const imgElement = imageCell.querySelector("img");
+  const imageSrc = imgElement ? imgElement.src : "";
+
+  // Display current image in modal
+  document.getElementById("currentStudentImage").src =
+    imageSrc || "https://via.placeholder.com/50";
+  document.getElementById("currentStudentImagePath").textContent =
+    imageSrc || "No image";
 
   openModal("updateStudentModal");
 }
@@ -312,45 +377,23 @@ function viewCustomer(customerId) {
   const id = cells[0].textContent;
   const name = cells[1].textContent;
   const phone = cells[2].textContent;
-  const imageSrc = cells[3].querySelector("img").src;
+  const dateOfBirth = cells[3].textContent;
+  const gender = cells[4].textContent;
+  const address = cells[5].textContent;
+  const imageSrc = cells[6].querySelector("img").src;
 
-  // Fetch full customer data from PHP session
-  fetch(`../data/customers.php?action=get&id=${customerId}`)
-    .then((response) => response.json())
-    .then((customer) => {
-      if (customer) {
-        document.getElementById("viewCustomerId").textContent =
-          "ID: " + customer.id;
-        document.getElementById("viewCustomerName").textContent = customer.name;
-        document.getElementById("viewCustomerPhone").textContent =
-          customer.phone;
-        document.getElementById("viewCustomerImage").src =
-          customer.image || imageSrc;
-        document.getElementById("viewCustomerImage").alt = customer.name;
-        document.getElementById("viewCustomerDateOfBirth").textContent =
-          customer.dateOfBirth;
-        document.getElementById("viewCustomerGender").textContent =
-          customer.gender;
-        document.getElementById("viewCustomerAddress").textContent =
-          customer.address;
+  // Populate view modal with table data
+  document.getElementById("viewCustomerId").textContent = "ID: " + id;
+  document.getElementById("viewCustomerName").textContent = name;
+  document.getElementById("viewCustomerPhone").textContent = phone;
+  document.getElementById("viewCustomerDateOfBirth").textContent =
+    dateOfBirth || "N/A";
+  document.getElementById("viewCustomerGender").textContent = gender || "N/A";
+  document.getElementById("viewCustomerAddress").textContent = address || "N/A";
+  document.getElementById("viewCustomerImage").src = imageSrc;
+  document.getElementById("viewCustomerImage").alt = name;
 
-        openModal("viewCustomerModal");
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching customer data:", error);
-      // Fallback to basic data
-      document.getElementById("viewCustomerId").textContent = "ID: " + id;
-      document.getElementById("viewCustomerName").textContent = name;
-      document.getElementById("viewCustomerPhone").textContent = phone;
-      document.getElementById("viewCustomerImage").src = imageSrc;
-      document.getElementById("viewCustomerImage").alt = name;
-      document.getElementById("viewCustomerDateOfBirth").textContent = "N/A";
-      document.getElementById("viewCustomerGender").textContent = "N/A";
-      document.getElementById("viewCustomerAddress").textContent = "N/A";
-
-      openModal("viewCustomerModal");
-    });
+  openModal("viewCustomerModal");
 }
 
 // Function to save tab state to session
@@ -380,47 +423,24 @@ function viewStudent(studentId) {
   if (!row) return;
 
   const cells = row.querySelectorAll("td");
-  const id = cells[0].textContent;
-  const name = cells[1].textContent;
-  const email = cells[2].textContent;
-  const imageSrc = cells[3].querySelector("img").src;
+  const id = cells[0].textContent; // Mã SV
+  const name = cells[1].textContent; // Tên SV
+  const email = cells[2].textContent; // Email
+  const phone = cells[3].textContent; // Sô diên thoai
+  const gender = cells[4].textContent; // Giói tính
+  const address = cells[5].textContent; // Quê quán
+  const status = cells[6].textContent; // Trang thái
+  const imageSrc = cells[7].querySelector("img").src;
 
-  // Fetch full student data from PHP session
-  fetch(`../data/students.php?action=get&id=${studentId}`)
-    .then((response) => response.json())
-    .then((student) => {
-      if (student) {
-        document.getElementById("viewStudentId").textContent =
-          "ID: " + student.id;
-        document.getElementById("viewStudentName").textContent = student.name;
-        document.getElementById("viewStudentEmail").textContent = student.email;
-        document.getElementById("viewStudentImage").src =
-          student.image || imageSrc;
-        document.getElementById("viewStudentImage").alt = student.name;
-        document.getElementById("viewStudentPhone").textContent = student.phone;
-        document.getElementById("viewStudentDateOfBirth").textContent =
-          student.dateOfBirth;
-        document.getElementById("viewStudentGender").textContent =
-          student.gender;
-        document.getElementById("viewStudentAddress").textContent =
-          student.address;
+  // Populate view modal with table data
+  document.getElementById("viewStudentId").textContent = "ID: " + id;
+  document.getElementById("viewStudentName").textContent = name;
+  document.getElementById("viewStudentEmail").textContent = email;
+  document.getElementById("viewStudentPhone").textContent = phone;
+  document.getElementById("viewStudentGender").textContent = gender;
+  document.getElementById("viewStudentAddress").textContent = address;
+  document.getElementById("viewStudentImage").src = imageSrc;
+  document.getElementById("viewStudentImage").alt = name;
 
-        openModal("viewStudentModal");
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching student data:", error);
-      // Fallback to basic data
-      document.getElementById("viewStudentId").textContent = "ID: " + id;
-      document.getElementById("viewStudentName").textContent = name;
-      document.getElementById("viewStudentEmail").textContent = email;
-      document.getElementById("viewStudentImage").src = imageSrc;
-      document.getElementById("viewStudentImage").alt = name;
-      document.getElementById("viewStudentPhone").textContent = "N/A";
-      document.getElementById("viewStudentDateOfBirth").textContent = "N/A";
-      document.getElementById("viewStudentGender").textContent = "N/A";
-      document.getElementById("viewStudentAddress").textContent = "N/A";
-
-      openModal("viewStudentModal");
-    });
+  openModal("viewStudentModal");
 }

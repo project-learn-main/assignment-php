@@ -50,11 +50,15 @@ include_once __DIR__ . '/../../data/students.php';
         <table class="w-full text-white">
             <thead>
                 <tr class="border-b border-gray-700">
-                    <th class="text-left py-3 px-6 font-medium text-gray-300">ID</th>
-                    <th class="text-left py-3 px-6 font-medium text-gray-300">Name</th>
-                    <th class="text-left py-3 px-6 font-medium text-gray-300">Email</th>
-                    <th class="text-left py-3 px-6 font-medium text-gray-300">Image</th>
-                    <th class="text-center py-3 px-6 font-medium text-gray-300">Actions</th>
+                    <th class="text-left py-3 px-4 font-medium text-gray-300">Mã SV</th>
+                    <th class="text-left py-3 px-4 font-medium text-gray-300">Tên SV</th>
+                    <th class="text-left py-3 px-4 font-medium text-gray-300">Email</th>
+                    <th class="text-left py-3 px-4 font-medium text-gray-300">Sô diên thoai</th>
+                    <th class="text-left py-3 px-4 font-medium text-gray-300">Giói tính</th>
+                    <th class="text-left py-3 px-4 font-medium text-gray-300">Quê quán</th>
+                    <th class="text-left py-3 px-4 font-medium text-gray-300">Trang thái</th>
+                    <th class="text-center py-3 px-4 font-medium text-gray-300">Hinh anh</th>
+                    <th class="text-center py-3 px-4 font-medium text-gray-300">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -62,13 +66,28 @@ include_once __DIR__ . '/../../data/students.php';
                 $students = $_SESSION['students']; 
                 foreach ($students as $student) {
                     echo '<tr class="border-b border-gray-800 hover:bg-gray-800 transition-colors" data-student-id="' . $student['id'] . '">';
-                    echo '<td class="py-3 px-6 font-semibold">' . $student['id'] . '</td>';
-                    echo '<td class="py-3 px-6">' . $student['name'] . '</td>';
-                    echo '<td class="py-3 px-6">' . $student['email'] . '</td>';
-                    echo '<td class="py-3 px-6">';
-                    echo '<img src="' . $student['image'] . '" alt="' . $student['name'] . '" class="w-12 h-12 rounded-full">';
+                    echo '<td class="py-3 px-4 font-semibold">' . ($student['studentId'] ?? $student['id']) . '</td>';
+                    echo '<td class="py-3 px-4">' . $student['name'] . '</td>';
+                    echo '<td class="py-3 px-4">' . $student['email'] . '</td>';
+                    echo '<td class="py-3 px-4">' . ($student['phone'] ?? '') . '</td>';
+                    echo '<td class="py-3 px-4">' . ($student['gender'] ?? '') . '</td>';
+                    echo '<td class="py-3 px-4">' . ($student['address'] ?? '') . '</td>';
+                    echo '<td class="py-3 px-4">';
+                    $status = $student['status'] ?? 'Đang học';
+                    echo '<form method="POST" action="actions/update_student_status.php" style="margin: 0;">';
+                    echo '<input type="hidden" name="id" value="' . $student['id'] . '">';
+                    echo '<select class="w-full px-2 py-1 bg-gray-700 border border-gray-600 text-white rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                             name="status" onchange="this.form.submit()">';
+                    echo '<option value="Đang học"' . ($status === 'Đang học' ? ' selected' : '') . '>Đang học</option>';
+                    echo '<option value="Bảo lưu"' . ($status === 'Bảo lưu' ? ' selected' : '') . '>Bảo lưu</option>';
+                    echo '<option value="Thôi học"' . ($status === 'Thôi học' ? ' selected' : '') . '>Thôi học</option>';
+                    echo '</select>';
+                    echo '</form>';
                     echo '</td>';
-                    echo '<td class="py-3 px-6 text-center">';
+                    echo '<td class="py-3 px-4 text-center">';
+                    echo '<img src="' . $student['image'] . '" alt="' . $student['name'] . '" class="w-10 h-10 rounded-full mx-auto">';
+                    echo '</td>';
+                    echo '<td class="py-3 px-4 text-center">';
                     echo '<button class="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded transition-colors" onclick="viewStudent(\'' . $student['id'] . '\')">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>

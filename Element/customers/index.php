@@ -54,11 +54,14 @@ if (isset($_GET['idDelete']) && $_GET['idDelete'] != '') {
         <table class="w-full text-white">
             <thead>
                 <tr class="border-b border-gray-700">
-                    <th class="text-left py-3 px-6 font-medium text-gray-300">ID</th>
-                    <th class="text-left py-3 px-6 font-medium text-gray-300">Name</th>
-                    <th class="text-left py-3 px-6 font-medium text-gray-300">Phone</th>
-                    <th class="text-left py-3 px-6 font-medium text-gray-300">Image</th>
-                    <th class="text-center py-3 px-6 font-medium text-gray-300">Actions</th>
+                    <th class="text-left py-3 px-4 font-medium text-gray-300">ID</th>
+                    <th class="text-left py-3 px-4 font-medium text-gray-300">Tên khách hàng</th>
+                    <th class="text-left py-3 px-4 font-medium text-gray-300">Sô diên thoai</th>
+                    <th class="text-left py-3 px-4 font-medium text-gray-300">Ngày sinh</th>
+                    <th class="text-left py-3 px-4 font-medium text-gray-300">Giói tính</th>
+                    <th class="text-left py-3 px-4 font-medium text-gray-300">Dia chi</th>
+                    <th class="text-center py-3 px-4 font-medium text-gray-300">Hinh anh</th>
+                    <th class="text-center py-3 px-4 font-medium text-gray-300">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -66,13 +69,17 @@ if (isset($_GET['idDelete']) && $_GET['idDelete'] != '') {
              $dataCustomers = $_SESSION['customers']; 
              foreach ($dataCustomers as $customer) {
                 echo '<tr class="border-b border-gray-800 hover:bg-gray-800 transition-colors" data-customer-id="' . $customer['id'] . '">';
-                echo '<td class="py-3 px-6">' . $customer['id'] . '</td>';
-                echo '<td class="py-3 px-6 font-semibold">' . $customer['name'] . '</td>';
-                echo '<td class="py-3 px-6">' . $customer['phone'] . '</td>';
-                echo '<td class="py-3 px-6">';
-                echo '<img src="' . $customer['image'] . '" alt="' . $customer['name'] . '" class="w-12 h-12 rounded-full">';
+                echo '<td class="py-3 px-4 font-semibold">' . $customer['id'] . '</td>';
+                echo '<td class="py-3 px-4">' . $customer['name'] . '</td>';
+                echo '<td class="py-3 px-4">' . $customer['phone'] . '</td>';
+                echo '<td class="py-3 px-4">' . ($customer['dateOfBirth'] ?? '') . '</td>';
+                echo '<td class="py-3 px-4">' . ($customer['gender'] ?? '') . '</td>';
+                echo '<td class="py-3 px-4">' . ($customer['address'] ?? '') . '</td>';
+                echo '<td class="py-3 px-4 text-center">';
+                $imageSrc = !empty($customer['image']) ? $customer['image'] : 'https://via.placeholder.com/50';
+                echo '<img src="' . $imageSrc . '" alt="' . $customer['name'] . '" class="w-10 h-10 rounded-full mx-auto">';
                 echo '</td>';
-                echo '<td class="py-3 px-6 text-center">';
+                echo '<td class="py-3 px-4 text-center">';
                 echo '<button class="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded transition-colors" onclick="viewCustomer(\'' . $customer['id'] . '\')">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>

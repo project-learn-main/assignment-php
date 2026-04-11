@@ -297,7 +297,7 @@
                 </svg>
             </button>
         </div>
-        <form method="POST" action="actions/update_customer.php">
+        <form method="POST" action="actions/update_customer.php" enctype="multipart/form-data">
             <input type="hidden" id="updateCustomerId" name="id">
             <div class="p-4">
                 <div class="mb-4">
@@ -305,15 +305,49 @@
                     <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
                            id="updateCustomerName" name="name" required>
                 </div>
-                <div class="mb-4">
-                    <label for="updateCustomerEmail" class="block text-gray-300 font-medium mb-2">Email Address</label>
-                    <input type="email" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="updateCustomerEmail" name="email" required>
-                </div>
+                
                 <div class="mb-4">
                     <label for="updateCustomerPhone" class="block text-gray-300 font-medium mb-2">Phone Number</label>
                     <input type="tel" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
                            id="updateCustomerPhone" name="phone" required>
+                </div>
+                <div class="mb-4">
+                    <label for="updateCustomerDateOfBirth" class="block text-gray-300 font-medium mb-2">Date Of Birth</label>
+                    <input type="date" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                           id="updateCustomerDateOfBirth" name="dateOfBirth" required>
+                </div>
+                <div class="mb-4">
+                    <label for="updateCustomerGender" class="block text-gray-300 font-medium mb-2">Gender</label>
+                    <select class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                           id="updateCustomerGender" name="gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="updateCustomerAddress" class="block text-gray-300 font-medium mb-2">Address</label>
+                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                           id="updateCustomerAddress" name="address" required>
+                </div>
+                <div class="mb-4">
+                    <label for="updateCustomerPersonalImage" class="block text-gray-300 font-medium mb-2">Personal Image</label>
+                    <div class="space-y-3">
+                        <!-- Current Image Display -->
+                        <div class="flex items-center space-x-4">
+                            <img id="currentCustomerImage" src="https://via.placeholder.com/50" alt="Current Image" class="w-16 h-16 rounded-full object-cover">
+                            <div>
+                                <p class="text-sm text-gray-400">Current Image</p>
+                                <p id="currentCustomerImagePath" class="text-xs text-gray-500">No image</p>
+                            </div>
+                        </div>
+                        <!-- New Image Upload -->
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-1">Upload New Image (Optional)</label>
+                            <input type="file" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent file:text-gray-400" 
+                                   id="updateCustomerPersonalImage" name="personal_image" accept="image/*">
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="flex items-center justify-end gap-2 p-4 border-t border-gray-700">
@@ -493,7 +527,7 @@
 
 <!-- Update Student Modal -->
 <div id="updateStudentModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-    <div class="bg-gray-800 text-white rounded-xl max-w-md w-full mx-4">
+    <div class="bg-gray-800 max-h-[50rem] overflow-y-auto text-white rounded-xl max-w-md w-full mx-4">
         <div class="flex items-center justify-between p-4 border-b border-gray-700">
             <h5 class="text-lg font-semibold">Update Student</h5>
             <button type="button" class="text-gray-400 hover:text-white transition-colors" onclick="closeModal('updateStudentModal')">
@@ -502,7 +536,7 @@
                 </svg>
             </button>
         </div>
-        <form method="POST" action="actions/update_student.php">
+        <form method="POST" action="actions/update_student.php" enctype="multipart/form-data">
             <input type="hidden" id="updateStudentId" name="id">
             <div class="p-4">
                 <div class="mb-4">
@@ -514,35 +548,57 @@
                     <label for="updateStudentEmail" class="block text-gray-300 font-medium mb-2">Email Address</label>
                     <input type="email" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
                            id="updateStudentEmail" name="email" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="updateStudentIdNum" class="block text-gray-300 font-medium mb-2">Student ID</label>
+                        <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                            id="updateStudentIdNum" name="studentId" readonly>
+                    </div>
+                <div class="mb-4">
+                    <label for="updateStudentPhone" class="block text-gray-300 font-medium mb-2">Sô diên thoai</label>
+                    <input type="tel" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                           id="updateStudentPhone" name="phone" required>
                 </div>
                 <div class="mb-4">
-                    <label for="updateStudentIdNum" class="block text-gray-300 font-medium mb-2">Student ID</label>
+                    <label for="updateStudentGender" class="block text-gray-300 font-medium mb-2">Giói tính</label>
+                    <select class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" id="updateStudentGender" name="gender" required>
+                        <option value="">Chon giói tính</option>
+                        <option value="Nam">Nam</option>
+                        <option value="Nữ">Nữ</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="updateStudentAddress" class="block text-gray-300 font-medium mb-2">Quê quán</label>
                     <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="updateStudentIdNum" name="studentId" required>
+                           id="updateStudentAddress" name="address" required>
                 </div>
                 <div class="mb-4">
-                    <label for="updateStudentCourse" class="block text-gray-300 font-medium mb-2">Course</label>
-                    <select class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" id="updateStudentCourse" name="course" required>
-                        <option value="">Select Course</option>
-                        <option value="Computer Science">Computer Science</option>
-                        <option value="Business Administration">Business Administration</option>
-                        <option value="Engineering">Engineering</option>
+                    <label for="updateStudentStatus" class="block text-gray-300 font-medium mb-2">Trang thái</label>
+                    <select class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" id="updateStudentStatus" name="status" required>
+                        <option value="">Chon trang thái</option>
+                        <option value="Đang học">Đang học</option>
+                        <option value="Bảo lưu">Bảo lưu</option>
+                        <option value="Thôi học">Thôi học</option>
                     </select>
                 </div>
                 <div class="mb-4">
-                    <label for="updateStudentYear" class="block text-gray-300 font-medium mb-2">Year</label>
-                    <select class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" id="updateStudentYear" name="year" required>
-                        <option value="">Select Year</option>
-                        <option value="1st Year">1st Year</option>
-                        <option value="2nd Year">2nd Year</option>
-                        <option value="3rd Year">3rd Year</option>
-                        <option value="4th Year">4th Year</option>
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <label for="updateStudentGpa" class="block text-gray-300 font-medium mb-2">GPA</label>
-                    <input type="number" step="0.1" min="0" max="4" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                           id="updateStudentGpa" name="gpa" required>
+                    <label for="updateStudentImage" class="block text-gray-300 font-medium mb-2">Hinh anh</label>
+                    <div class="space-y-3">
+                        <!-- Current Image Display -->
+                        <div class="flex items-center space-x-4">
+                            <img id="currentStudentImage" src="https://via.placeholder.com/50" alt="Current Image" class="w-16 h-16 rounded-full object-cover">
+                            <div>
+                                <p class="text-sm text-gray-400">Current Image</p>
+                                <p id="currentStudentImagePath" class="text-xs text-gray-500">No image</p>
+                            </div>
+                        </div>
+                        <!-- New Image Upload -->
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-1">Upload New Image (Optional)</label>
+                            <input type="file" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent file:text-gray-400" 
+                                   id="updateStudentImage" name="image" accept="image/*">
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="flex items-center justify-end gap-2 p-4 border-t border-gray-700">
