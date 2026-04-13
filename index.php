@@ -8,6 +8,10 @@
     include_once 'data/customers.php';
     include_once 'data/students.php';
     include_once 'data/orders.php';
+    
+    // Determine active tab - prioritize URL parameter, then session, then default
+    $activeTab = isset($_GET['tab']) ? $_GET['tab'] : (isset($_SESSION['active_tab']) ? $_SESSION['active_tab'] : 'orders');
+    $_SESSION['active_tab'] = $activeTab; // Update session
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,7 +53,7 @@
                 <!-- Navigation -->
                 <ul class="flex-1 px-3 py-2">
                     <li class="mb-1">
-                        <a class="flex items-center px-3 py-2 text-white rounded-lg hover:bg-primary transition-colors <?php echo (isset($_SESSION['active_tab']) && $_SESSION['active_tab'] == 'orders') || (!isset($_SESSION['active_tab']) && (!isset($_GET['tab']) || $_GET['tab'] != 'customers' && $_GET['tab'] != 'students')) ? 'bg-primary' : ''; ?>" href="#" data-tab="orders">
+                        <a class="flex items-center px-3 py-2 text-white rounded-lg hover:bg-primary transition-colors <?php echo $activeTab == 'orders' ? 'bg-primary' : ''; ?>" href="?tab=orders&page=1" data-tab="orders">
                             <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z"></path>
                             </svg>
@@ -57,7 +61,7 @@
                         </a>
                     </li>
                     <li class="mb-1">
-                        <a class="flex items-center px-3 py-2 text-white rounded-lg hover:bg-primary transition-colors <?php echo (isset($_SESSION['active_tab']) && $_SESSION['active_tab'] == 'customers') || (isset($_GET['tab']) && $_GET['tab'] == 'customers') ? 'bg-primary' : ''; ?>" href="#" data-tab="customers">
+                        <a class="flex items-center px-3 py-2 text-white rounded-lg hover:bg-primary transition-colors <?php echo $activeTab == 'customers' ? 'bg-primary' : ''; ?>" href="?tab=customers&page=1" data-tab="customers">
                             <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"></path>
                             </svg>
@@ -65,7 +69,7 @@
                         </a>
                     </li>
                     <li class="mb-1">
-                        <a class="flex items-center px-3 py-2 text-white rounded-lg hover:bg-primary transition-colors <?php echo (isset($_SESSION['active_tab']) && $_SESSION['active_tab'] == 'students') || (isset($_GET['tab']) && $_GET['tab'] == 'students') ? 'bg-primary' : ''; ?>" href="#" data-tab="students">
+                        <a class="flex items-center px-3 py-2 text-white rounded-lg hover:bg-primary transition-colors <?php echo $activeTab == 'students' ? 'bg-primary' : ''; ?>" href="?tab=students&page=1" data-tab="students">
                             <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path>
                             </svg>
@@ -89,29 +93,17 @@
         <!-- Main Content -->
         <main class="flex-1 bg-dark overflow-auto">
             <!-- Orders Tab -->
-            <div id="orders-tab" class="tab-content <?php 
-                $showOrders = (isset($_SESSION['active_tab']) && $_SESSION['active_tab'] == 'orders') || 
-                             (!isset($_SESSION['active_tab']) && (!isset($_GET['tab']) || $_GET['tab'] != 'customers' && $_GET['tab'] != 'students'));
-                echo $showOrders ? 'block' : 'hidden'; 
-            ?> h-full">
+            <div id="orders-tab" class="tab-content <?php echo $activeTab == 'orders' ? 'block' : 'hidden'; ?> h-full">
                 <?php include 'Element/orders/index.php'; ?>
             </div>
 
             <!-- Customers Tab -->      
-            <div id="customers-tab" class="tab-content <?php 
-                $showCustomers = (isset($_SESSION['active_tab']) && $_SESSION['active_tab'] == 'customers') || 
-                                (isset($_GET['tab']) && $_GET['tab'] == 'customers');
-                echo $showCustomers ? 'block' : 'hidden'; 
-            ?> h-full">
+            <div id="customers-tab" class="tab-content <?php echo $activeTab == 'customers' ? 'block' : 'hidden'; ?> h-full">
                 <?php include 'Element/customers/index.php'; ?>
             </div>
 
             <!-- Students Tab -->
-            <div id="students-tab" class="tab-content <?php 
-                $showStudents = (isset($_SESSION['active_tab']) && $_SESSION['active_tab'] == 'students') || 
-                               (isset($_GET['tab']) && $_GET['tab'] == 'students');
-                echo $showStudents ? 'block' : 'hidden'; 
-            ?> h-full">
+            <div id="students-tab" class="tab-content <?php echo $activeTab == 'students' ? 'block' : 'hidden'; ?> h-full">
                 <?php include 'Element/students/index.php'; ?>
             </div>
 

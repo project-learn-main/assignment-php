@@ -25,13 +25,37 @@ function closeModal(modalId) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Handle URL parameter to switch tabs
+  // Handle URL parameter to switch tabs (but don't trigger save/reset)
   const urlParams = new URLSearchParams(window.location.search);
   const tab = urlParams.get("tab");
   if (tab) {
     const targetLink = document.querySelector(`[data-tab="${tab}"]`);
     if (targetLink) {
-      targetLink.click();
+      // Manually set active state without triggering click event
+      const navLinks = document.querySelectorAll("[data-tab]");
+      const tabContents = document.querySelectorAll(".tab-content");
+
+      // Remove active states from all tabs
+      navLinks.forEach((navLink) => {
+        navLink.classList.remove("bg-primary", "text-white");
+        navLink.classList.add("text-gray-300");
+      });
+
+      // Add active state to target tab
+      targetLink.classList.remove("text-gray-300");
+      targetLink.classList.add("bg-primary", "text-white");
+
+      // Hide all tab contents
+      tabContents.forEach((content) => {
+        content.classList.add("hidden");
+      });
+
+      // Show target tab content
+      const targetContent = document.getElementById(tab + "-tab");
+      if (targetContent) {
+        targetContent.classList.remove("hidden");
+        targetContent.classList.add("block");
+      }
     }
   }
 
@@ -41,7 +65,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   navLinks.forEach((link) => {
     link.addEventListener("click", function (e) {
-      e.preventDefault();
+
+      // Get current and target tab
+      const currentTab = document.querySelector(".tab-content:not(.hidden)");
+      const targetTab = this.getAttribute("data-tab");
+
+      // Only proceed if actually switching tabs
+      if (currentTab && currentTab.id === targetTab + "-tab") {
+        return; // Don't do anything if clicking the same tab
+      }
 
       // Remove active states from all tabs
       navLinks.forEach((navLink) => {
@@ -52,8 +84,6 @@ document.addEventListener("DOMContentLoaded", function () {
       // Add active state to clicked tab
       this.classList.remove("text-gray-300");
       this.classList.add("bg-primary", "text-white");
-
-      const targetTab = this.getAttribute("data-tab");
 
       // Hide all tab contents
       tabContents.forEach((content) => {
@@ -67,8 +97,11 @@ document.addEventListener("DOMContentLoaded", function () {
         targetContent.classList.add("block");
       }
 
-      // Save tab state to session
+      // Save tab state to session and reset pagination
       saveTabState(targetTab);
+
+      // Reset pagination to page 1 only when actually switching tabs
+      resetPaginationToPage1();
     });
   });
 
@@ -373,7 +406,7 @@ function viewCustomer(customerId) {
 
 // Function to save tab state to session
 function saveTabState(tab) {
-  fetch("../actions/save_tab.php", {
+  fetch("actions/save_tab.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -418,4 +451,22 @@ function viewStudent(studentId) {
   document.getElementById("viewStudentImage").alt = name;
 
   openModal("viewStudentModal");
+}
+
+// Function to reset pagination to page 1
+function resetPaginationToPage1() {
+  // Only reset pagination for the currently visible tab
+  const activeTabContent = document.querySelector(".tab-content:not(.hidden)");
+  if (activeTabContent) {
+    const paginationLinks =
+      activeTabContent.querySelectorAll('a[href*="page="]');
+    paginationLinks.forEach((link) => {
+      const href = link.getAttribute("href");
+      if (href) {
+        // Replace page parameter with page=1
+        const newHref = href.replace(/page=\d+/, "page=1");
+        link.setAttribute("href", newHref);
+      }
+    });
+  }
 }

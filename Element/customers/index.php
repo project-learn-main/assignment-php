@@ -12,6 +12,20 @@ if (isset($_GET['idDelete']) && $_GET['idDelete'] != '') {
         }
     }
 }
+
+// Simple pagination
+$currentPage = 1; // Default to page 1
+// Only read page parameter if this tab is active
+$activeTab = isset($_GET['tab']) ? $_GET['tab'] : (isset($_SESSION['active_tab']) ? $_SESSION['active_tab'] : 'customers');
+if ($activeTab === 'customers' && isset($_GET['page'])) {
+    $currentPage = (int)$_GET['page'];
+}
+$perPage = 5;
+$total = count($_SESSION['customers']);
+$totalPages = ceil($total / $perPage);
+$page = max(1, min($currentPage, $totalPages));
+$offset = ($currentPage - 1) * $perPage;
+$customersPage = array_slice($_SESSION['customers'], $offset, $perPage);
 ?>
 <!-- Header -->
 <div class=" h-full">
@@ -50,7 +64,7 @@ if (isset($_GET['idDelete']) && $_GET['idDelete'] != '') {
     </div>
 
     <!-- Table -->
-    <div class="overflow-x-auto">
+    <div class="overflow-x-auto" style="min-height: 400px;">
         <table class="w-full text-white">
             <thead>
                 <tr class="border-b border-gray-700">
@@ -67,7 +81,9 @@ if (isset($_GET['idDelete']) && $_GET['idDelete'] != '') {
             <tbody>
                 <?php 
              $dataCustomers = $_SESSION['customers']; 
-             foreach ($dataCustomers as $customer) {
+             $rowCount = 0;
+             foreach ($customersPage as $customer) {
+                $rowCount++;
                 echo '<tr class="border-b border-gray-800 hover:bg-gray-800 transition-colors" data-customer-id="' . $customer['id'] . '">';
                 echo '<td class="py-3 px-4 font-semibold">' . $customer['id'] . '</td>';
                 echo '<td class="py-3 px-4">' . $customer['name'] . '</td>';
@@ -99,11 +115,57 @@ if (isset($_GET['idDelete']) && $_GET['idDelete'] != '') {
                 echo '</td>';
                 echo '</tr>';
              }
+             
+             // Add empty rows to always show 5 rows
+             for ($i = $rowCount; $i < 5; $i++) {
+                echo '<tr class="border-b border-gray-800">';
+                echo '<td class="py-3 px-4 font-semibold">&nbsp;</td>';
+                echo '<td class="py-3 px-4">&nbsp;</td>';
+                echo '<td class="py-3 px-4">&nbsp;</td>';
+                echo '<td class="py-3 px-4">&nbsp;</td>';
+                echo '<td class="py-3 px-4">&nbsp;</td>';
+                echo '<td class="py-3 px-4">&nbsp;</td>';
+                echo '<td class="py-3 px-4 text-center">&nbsp;</td>';
+                echo '<td class="py-3 px-4 text-center">&nbsp;</td>';
+                echo '</tr>';
+             }
              ?>
                 
             </tbody>
         </table>
     </div>
+    
+    <!-- Pagination -->
+    <?php if ($totalPages > 1): ?>
+    <div class="px-6 py-4 bg-gray-800 border-t border-gray-700">
+        <div class="flex justify-between items-center">
+            <div class="text-sm text-gray-400">
+                Hiển thị <?php echo ($offset + 1); ?> - <?php echo min($offset + $perPage, $total); ?> của <?php echo $total; ?> khách hàng
+            </div>
+            <div class="flex gap-2">
+                <?php if ($currentPage > 1): ?>
+                    <a href="?tab=customers&page=<?php echo $currentPage - 1; ?>" class="px-3 py-1 bg-gray-700 text-white rounded hover:bg-gray-600">Trước</a>
+                <?php else: ?>
+                    <span class="px-3 py-1 bg-gray-700 text-white rounded opacity-50 cursor-not-allowed">Trước</span>
+                <?php endif; ?>
+                
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <?php if ($i == $currentPage): ?>
+                        <span class="px-3 py-1 bg-blue-600 text-white rounded"><?php echo $i; ?></span>
+                    <?php else: ?>
+                        <a href="?tab=customers&page=<?php echo $i; ?>" class="px-3 py-1 bg-gray-700 text-white rounded hover:bg-gray-600"><?php echo $i; ?></a>
+                    <?php endif; ?>
+                <?php endfor; ?>
+                
+                <?php if ($currentPage < $totalPages): ?>
+                    <a href="?tab=customers&page=<?php echo $currentPage + 1; ?>" class="px-3 py-1 bg-gray-700 text-white rounded hover:bg-gray-600">Sau</a>
+                <?php else: ?>
+                    <span class="px-3 py-1 bg-gray-700 text-white rounded opacity-50 cursor-not-allowed">Sau</span>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+    <?php endif; ?>
 </div>
 
 

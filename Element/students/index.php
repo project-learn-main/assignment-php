@@ -3,6 +3,20 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 include_once __DIR__ . '/../../data/students.php';
+
+// Simple pagination
+$currentPage = 1; // Default to page 1
+// Only read page parameter if this tab is active
+$activeTab = isset($_GET['tab']) ? $_GET['tab'] : (isset($_SESSION['active_tab']) ? $_SESSION['active_tab'] : 'students');
+if ($activeTab === 'students' && isset($_GET['page'])) {
+    $currentPage = (int)$_GET['page'];
+}
+$perPage = 5;
+$total = count($_SESSION['students']);
+$totalPages = ceil($total / $perPage);
+$page = max(1, min($currentPage, $totalPages));
+$offset = ($currentPage - 1) * $perPage;
+$studentsPage = array_slice($_SESSION['students'], $offset, $perPage);
 ?>
 
 <!-- Header -->
@@ -51,7 +65,7 @@ include_once __DIR__ . '/../../data/students.php';
     </div>
 
     <!-- Table -->
-    <div class="overflow-x-auto">
+    <div class="overflow-x-auto" style="min-height: 400px;">
         <table class="w-full text-white">
             <thead>
                 <tr class="border-b border-gray-700">
@@ -69,7 +83,9 @@ include_once __DIR__ . '/../../data/students.php';
             <tbody>
                 <?php
                 $students = $_SESSION['students'];
-                foreach ($students as $student) {
+                $rowCount = 0;
+                foreach ($studentsPage as $student) {
+                    $rowCount++;
                     echo '<tr class="border-b border-gray-800 hover:bg-gray-800 transition-colors" data-student-id="' . $student['id'] . '">';
                     echo '<td class="py-3 px-4 font-semibold">' . ($student['studentId'] ?? $student['id']) . '</td>';
                     echo '<td class="py-3 px-4">' . $student['name'] . '</td>';
@@ -112,8 +128,55 @@ include_once __DIR__ . '/../../data/students.php';
                     echo '</td>';
                     echo '</tr>';
                 }
+                
+                // Add empty rows to always show 5 rows
+                for ($i = $rowCount; $i < 5; $i++) {
+                    echo '<tr class="border-b border-gray-800">';
+                    echo '<td class="py-3 px-4 font-semibold">&nbsp;</td>';
+                    echo '<td class="py-3 px-4">&nbsp;</td>';
+                    echo '<td class="py-3 px-4">&nbsp;</td>';
+                    echo '<td class="py-3 px-4">&nbsp;</td>';
+                    echo '<td class="py-3 px-4">&nbsp;</td>';
+                    echo '<td class="py-3 px-4">&nbsp;</td>';
+                    echo '<td class="py-3 px-4">&nbsp;</td>';
+                    echo '<td class="py-3 px-4 text-center">&nbsp;</td>';
+                    echo '<td class="py-3 px-4 text-center">&nbsp;</td>';
+                    echo '</tr>';
+                }
                 ?>
             </tbody>
         </table>
     </div>
+    
+    <!-- Pagination -->
+    <?php if ($totalPages > 1): ?>
+    <div class="px-6 py-4 bg-gray-800 border-t border-gray-700">
+        <div class="flex justify-between items-center">
+            <div class="text-sm text-gray-400">
+                Hiển thị <?php echo ($offset + 1); ?> - <?php echo min($offset + $perPage, $total); ?> của <?php echo $total; ?> sinh viên
+            </div>
+            <div class="flex gap-2">
+                <?php if ($currentPage > 1): ?>
+                    <a href="?tab=students&page=<?php echo $currentPage - 1; ?>" class="px-3 py-1 bg-gray-700 text-white rounded hover:bg-gray-600">Trước</a>
+                <?php else: ?>
+                    <span class="px-3 py-1 bg-gray-700 text-white rounded opacity-50 cursor-not-allowed">Trước</span>
+                <?php endif; ?>
+                
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <?php if ($i == $currentPage): ?>
+                        <span class="px-3 py-1 bg-blue-600 text-white rounded"><?php echo $i; ?></span>
+                    <?php else: ?>
+                        <a href="?tab=students&page=<?php echo $i; ?>" class="px-3 py-1 bg-gray-700 text-white rounded hover:bg-gray-600"><?php echo $i; ?></a>
+                    <?php endif; ?>
+                <?php endfor; ?>
+                
+                <?php if ($currentPage < $totalPages): ?>
+                    <a href="?tab=students&page=<?php echo $currentPage + 1; ?>" class="px-3 py-1 bg-gray-700 text-white rounded hover:bg-gray-600">Sau</a>
+                <?php else: ?>
+                    <span class="px-3 py-1 bg-gray-700 text-white rounded opacity-50 cursor-not-allowed">Sau</span>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+    <?php endif; ?>
 </div>
