@@ -26,7 +26,10 @@ if(isset($_POST['name']) && isset($_POST['dateOfBirth']) && isset($_POST['gender
             'address' => $address,
             'image' => 'images/' . $picture['name']
         ];
-    } 
+        setcookie('customer_add_success', 'true', time() + 10, "/");
+    } else {
+        setcookie('customer_add_error', 'true', time() + 10, "/");
+    }
    
 }
 

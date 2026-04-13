@@ -66,7 +66,7 @@ $studentsPage = array_slice($_SESSION['students'], $offset, $perPage);
     </div>
 
     <!-- Table -->
-    <div class="overflow-x-auto" style="min-height: 520px;">
+    <div class="overflow-x-auto" style="min-height: 400px;">
         <table class="w-full text-white">
             <thead>
                 <tr class="border-b border-gray-700">

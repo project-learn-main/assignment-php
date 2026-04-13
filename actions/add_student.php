@@ -31,12 +31,14 @@ if(isset($_POST['name']) && isset($_POST['dateOfBirth']) && isset($_POST['gender
     'status' => 'Đang học'
 ];
         $_SESSION['students'][] = $newStudent;
+        setcookie('student_add_success', 'true', time() + 10, "/");
         
         // Debug: Log new student added
         error_log("New student added: " . print_r($newStudent, true));
         error_log("Total students in session: " . count($_SESSION['students']));
-} 
-
+    } else {
+        setcookie('student_add_error', 'true', time() + 10, "/");
+    }
 
 }
 header('Location: ../index.php?tab=students');
