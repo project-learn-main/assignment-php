@@ -9,7 +9,7 @@ if (isset($_POST["orderId"]) && isset($_POST["status"])) {
             break;
         }
     }
-    header('Location: ../index.php?tab=order&status_updated=success');
+    header('Location: ../index.php?tab=orders');
 } else {
     echo ("error");
 }

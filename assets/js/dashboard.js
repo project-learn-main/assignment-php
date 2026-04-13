@@ -65,7 +65,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   navLinks.forEach((link) => {
     link.addEventListener("click", function (e) {
-
       // Get current and target tab
       const currentTab = document.querySelector(".tab-content:not(.hidden)");
       const targetTab = this.getAttribute("data-tab");

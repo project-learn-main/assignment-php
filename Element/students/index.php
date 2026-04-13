@@ -6,6 +6,7 @@ include_once __DIR__ . '/../../data/students.php';
 
 // Simple pagination
 $currentPage = 1; // Default to page 1
+
 // Only read page parameter if this tab is active
 $activeTab = isset($_GET['tab']) ? $_GET['tab'] : (isset($_SESSION['active_tab']) ? $_SESSION['active_tab'] : 'students');
 if ($activeTab === 'students' && isset($_GET['page'])) {
@@ -65,7 +66,7 @@ $studentsPage = array_slice($_SESSION['students'], $offset, $perPage);
     </div>
 
     <!-- Table -->
-    <div class="overflow-x-auto" style="min-height: 400px;">
+    <div class="overflow-x-auto" style="min-height: 520px;">
         <table class="w-full text-white">
             <thead>
                 <tr class="border-b border-gray-700">

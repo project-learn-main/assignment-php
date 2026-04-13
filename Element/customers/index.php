@@ -64,7 +64,7 @@ $customersPage = array_slice($_SESSION['customers'], $offset, $perPage);
     </div>
 
     <!-- Table -->
-    <div class="overflow-x-auto" style="min-height: 400px;">
+    <div class="overflow-x-auto" style="min-height: 375px;">
         <table class="w-full text-white">
             <thead>
                 <tr class="border-b border-gray-700">
