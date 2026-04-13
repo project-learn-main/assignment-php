@@ -73,7 +73,6 @@
             `;
 
             toastContainer.appendChild(toast);
-            console.log('Toast added to container');
 
             // Animation - slide vào
             setTimeout(() => {
@@ -86,9 +85,8 @@
                 toast.classList.remove('translate-x-0');
                 toast.classList.add('translate-x-full');
                 setTimeout(() => toast.remove(), 300);
-            }, 3000);
+            }, 1500);
             
-            console.log('Toast shown successfully');
         }
     </script>
    
@@ -173,9 +171,7 @@
  <script src="assets/js/dashboard.js"></script>
  <?php if(isset($_COOKIE['login_success'])): ?>
  <script>
-    console.log('Login success cookie found');
-    showToast('Chào <?php echo $_COOKIE['name']; ?>! Chúc làm vui!', 'success');
-    // Xóa cookie ngay l?p t?
+    showToast('Chào <?php echo $_COOKIE['name']; ?>!', 'success');
     document.cookie = 'login_success=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
  </script>
  <?php endif; ?>
