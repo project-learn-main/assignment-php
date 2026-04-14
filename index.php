@@ -189,6 +189,14 @@
  </script>
  <?php endif; ?>
 
+  <?php if(isset($_COOKIE['order_update_success'])): ?>
+ <script>
+    showToast('Cập nhật đơn hàng thành công!', 'success');
+    // Xóa cookie ngay lập tức
+    document.cookie = 'order_update_success=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+ </script>
+ <?php endif; ?>
+
   <?php if(isset($_COOKIE['order_delete_success'])): ?>
  <script>
     showToast('Xóa đơn hàng thành công!', 'success');
@@ -213,6 +221,14 @@
  </script>
  <?php endif; ?>
  
+ <?php if(isset($_COOKIE['customer_update_success'])): ?>
+ <script>
+    showToast('Cập nhật khách hàng thành công!', 'success');
+    // Xóa cookie ngay lập tức
+    document.cookie = 'customer_update_success=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+ </script>
+ <?php endif; ?>
+ 
  <?php if(isset($_COOKIE['customer_add_error'])): ?>
  <script>
     showToast('Thêm khách hàng không thành công!', 'error');
@@ -226,6 +242,14 @@
     showToast('Thêm sinh viên thành công!', 'success');
     // Xóa cookie ngay lập tức
     document.cookie = 'student_add_success=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+ </script>
+ <?php endif; ?>
+ 
+ <?php if(isset($_COOKIE['student_update_success'])): ?>
+ <script>
+    showToast('Cập nhật sinh viên thành công!', 'success');
+    // Xóa cookie ngay lập tức
+    document.cookie = 'student_update_success=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
  </script>
  <?php endif; ?>
  

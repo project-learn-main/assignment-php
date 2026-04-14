@@ -27,7 +27,7 @@ $orderStatusLabels = [
 $studentStatusStats = [];
 $students = $_SESSION['students'] ?? [];
 foreach ($students as $student) {
-    $status = $student['status'] ?? 'N/A';
+    $status = $student['status'] ?? 'Đang học';
     if (!isset($studentStatusStats[$status])) {
         $studentStatusStats[$status] = 0;
     }
@@ -36,10 +36,9 @@ foreach ($students as $student) {
 
 // Vietnamese student status mapping
 $studentStatusLabels = [
-    'Dang hoc' => 'Dang hoc',
-    'Bao luu' => 'Bao luu',
-    'Thoi hoc' => 'Thoi hoc',
-    'N/A' => 'Chua xac dinh'
+    'Đang học' => 'Đang học',
+    'Bảo lưu' => 'Bảo lưu',
+    'Thôi học' => 'Thôi học',
 ];
 
 // Calculate gender statistics with Vietnamese labels
@@ -52,10 +51,9 @@ foreach ($customers as $customer) {
     }
 }
 
-// Vietnamese gender labels
 $genderLabels = [
     'Male' => 'Nam',
-    'Female' => 'Nü'
+    'Female' => 'Nữ'
 ];
 ?>
 
@@ -166,27 +164,6 @@ $genderLabels = [
             </div>
         </div>
 
-        <!-- Recent Activity -->
-        <div class="bg-secondary rounded-lg p-6 border border-slate-700">
-            <h3 class="text-lg font-semibold text-white mb-4">Hoạt động gần đây</h3>
-            <div class="space-y-3">
-                <div class="flex items-center justify-between text-sm">
-                    <span class="text-gray-300">Tổng số lượng dữ liệu</span>
-                    <span class="text-white font-medium"><?php echo $ordersCount + $customersCount + $studentsCount; ?></span>
-                </div>
-                <div class="flex items-center justify-between text-sm">
-                    <span class="text-gray-300">Đơn hàng trung bình/ngày</span>
-                    <span class="text-white font-medium"><?php echo round($ordersCount / 30, 1); ?></span>
-                </div>
-                <div class="flex items-center justify-between text-sm">
-                    <span class="text-gray-300">Tỷ lệ khách hàng/tháng</span>
-                    <span class="text-white font-medium"><?php echo round($customersCount / 12, 1); ?></span>
-                </div>
-                <div class="flex items-center justify-between text-sm">
-                    <span class="text-gray-300">Sinh viên đang học</span>
-                    <span class="text-white font-medium"><?php echo $studentStatusStats['Dang hoc'] ?? 0; ?></span>
-                </div>
-            </div>
-        </div>
+       
     </div>
 </div>

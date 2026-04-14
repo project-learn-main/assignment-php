@@ -43,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
         foreach ($_SESSION['students'] as $key => $student) {
             if ($student['id'] == $studentId) {
                 $_SESSION['students'][$key] = $updatedData;
+                setcookie('student_update_success', 'true', time() + 10, "/");
                 break;
             }
         }

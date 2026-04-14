@@ -44,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
                     $updatedData['image'] = $customer['image'];
                 }
                 $_SESSION['customers'][$key] = $updatedData;
+                setcookie('customer_update_success', 'true', time() + 10, "/");
                 break;
             }
         }

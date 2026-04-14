@@ -8,6 +8,7 @@ if(isset($_POST["id"]) && isset($_POST["status"])) {
     foreach($_SESSION['students'] as $index => $student) {
         if($student['id'] == $id) {
             $_SESSION['students'][$index]['status'] = $status;
+            setcookie('student_update_success', 'true', time() + 10, "/");
             break;
         }
     }   
