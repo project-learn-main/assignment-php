@@ -28,18 +28,8 @@ $ordersPage = array_slice($_SESSION['orders'], $offset, $perPage);
 <!-- Header -->
 <div class="h-full ">
     <div class="bg-gray-800 px-6 py-8">
-        <div class="flex justify-between items-center py-4">
-            <h2 class="text-white text-2xl font-semibold">Orders</h2>
-            <button class="bg-primary hover:opacity-80 text-white px-4 py-2 rounded-lg transition-colors flex items-center"
-                onclick="openModal('addOrderModal')">
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                </svg>
-                New Order
-            </button>
-        </div>
-
-        <!-- Filters -->
+        <h2 class="text-white text-2xl font-semibold">Orders</h2>
+        <!-- Filters
         <div class="py-3">
             <div class="flex gap-3">
                 <div class="flex-1">
@@ -68,12 +58,12 @@ $ordersPage = array_slice($_SESSION['orders'], $offset, $perPage);
                     </select>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 
 
     <!-- Table -->
-    <div class="overflow-x-auto" style="min-height: 375px;">
+    <div class="overflow-x-auto" style="min-height: 355px;">
         <table class="w-full text-white">
             <thead>
                 <tr class="border-b border-gray-700">
