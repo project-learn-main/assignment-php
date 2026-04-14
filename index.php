@@ -10,7 +10,7 @@
     include_once 'data/orders.php';
     
     // Determine active tab - prioritize URL parameter, then session, then default
-    $activeTab = isset($_GET['tab']) ? $_GET['tab'] : (isset($_SESSION['active_tab']) ? $_SESSION['active_tab'] : 'orders');
+    $activeTab = isset($_GET['tab']) ? $_GET['tab'] : (isset($_SESSION['active_tab']) ? $_SESSION['active_tab'] : 'dashboard');
     $_SESSION['active_tab'] = $activeTab; // Update session
 ?>
 <!DOCTYPE html>
@@ -108,6 +108,14 @@
                 <!-- Navigation -->
                 <ul class="flex-1 px-3 py-2">
                     <li class="mb-1">
+                        <a class="flex items-center px-3 py-2 text-white rounded-lg hover:bg-primary transition-colors <?php echo $activeTab == 'dashboard' ? 'bg-primary' : ''; ?>" href="?tab=dashboard" data-tab="dashboard">
+                            <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                            </svg>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="mb-1">
                         <a class="flex items-center px-3 py-2 text-white rounded-lg hover:bg-primary transition-colors <?php echo $activeTab == 'orders' ? 'bg-primary' : ''; ?>" href="?tab=orders&page=1" data-tab="orders">
                             <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z"></path>
@@ -147,6 +155,11 @@
 
         <!-- Main Content -->
         <main class="flex-1 bg-dark overflow-auto">
+            <!-- Dashboard Tab -->
+            <div id="dashboard-tab" class="tab-content <?php echo $activeTab == 'dashboard' ? 'block' : 'hidden'; ?> h-full">
+                <?php include 'Element/dashboard/index.php'; ?>
+            </div>
+
             <!-- Orders Tab -->
             <div id="orders-tab" class="tab-content <?php echo $activeTab == 'orders' ? 'block' : 'hidden'; ?> h-full">
                 <?php include 'Element/orders/index.php'; ?>
