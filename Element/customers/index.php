@@ -1,31 +1,31 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-include_once __DIR__ . '/../../data/customers.php';
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    include_once __DIR__ . '/../../data/customers.php';
 
-if (isset($_GET['idDelete']) && $_GET['idDelete'] != '') {
-    foreach($_SESSION['customers'] as $index => $customer) {
-        if($customer['id'] == $_GET['idDelete']) {
-            unset($_SESSION['customers'][$index]);
-            break;
+    if (isset($_GET['idDelete']) && $_GET['idDelete'] != '') {
+        foreach($_SESSION['customers'] as $index => $customer) {
+            if($customer['id'] == $_GET['idDelete']) {
+                unset($_SESSION['customers'][$index]);
+                break;
+            }
         }
     }
-}
 
-// Simple pagination
-$currentPage = 1; // Default to page 1
-// Only read page parameter if this tab is active
-$activeTab = isset($_GET['tab']) ? $_GET['tab'] : (isset($_SESSION['active_tab']) ? $_SESSION['active_tab'] : 'customers');
-if ($activeTab === 'customers' && isset($_GET['page'])) {
-    $currentPage = (int)$_GET['page'];
-}
-$perPage = 5;
-$total = count($_SESSION['customers']);
-$totalPages = ceil($total / $perPage);
-$page = max(1, min($currentPage, $totalPages));
-$offset = ($currentPage - 1) * $perPage;
-$customersPage = array_slice($_SESSION['customers'], $offset, $perPage);
+    // Simple pagination
+    $currentPage = 1; // Default to page 1
+    // Only read page parameter if this tab is active
+    $activeTab = isset($_GET['tab']) ? $_GET['tab'] : (isset($_SESSION['active_tab']) ? $_SESSION['active_tab'] : 'customers');
+    if ($activeTab === 'customers' && isset($_GET['page'])) {
+        $currentPage = (int)$_GET['page'];
+    }
+    $perPage = 5;
+    $total = count($_SESSION['customers']);
+    $totalPages = ceil($total / $perPage);
+    $page = max(1, min($currentPage, $totalPages));
+    $offset = ($currentPage - 1) * $perPage;
+    $customersPage = array_slice($_SESSION['customers'], $offset, $perPage);
 ?>
 <!-- Header -->
 <div class=" h-full">
@@ -39,7 +39,7 @@ $customersPage = array_slice($_SESSION['customers'], $offset, $perPage);
                 New Customer
             </button>
         </div>
-        <div class="py-3">
+        <!-- <div class="py-3">
             <div class="flex gap-3">
                 <div class="relative flex-1">
                     <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -60,7 +60,7 @@ $customersPage = array_slice($_SESSION['customers'], $offset, $perPage);
                     </select>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 
     <!-- Table -->

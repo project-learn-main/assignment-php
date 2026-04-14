@@ -33,7 +33,7 @@ $studentsPage = array_slice($_SESSION['students'], $offset, $perPage);
             </button>
         </div>
 
-        <div class="py-3">
+        <!-- <div class="py-3">
             <div class="flex gap-3">
                 <div class="flex-1">
                     <div class="relative">
@@ -62,7 +62,7 @@ $studentsPage = array_slice($_SESSION['students'], $offset, $perPage);
                     </select>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 
     <!-- Table -->
