@@ -33,14 +33,22 @@ $studentsPage = array_slice($sortedStudents, $offset, $perPage);
 <!-- Header -->
 <div class="h-full">
     <div class="bg-gray-800 px-6 py-8">
-        <div class="flex justify-between items-center py-4">
-            <h2 class="text-white text-2xl font-semibold">Students</h2>
-            <button class="bg-primary hover:opacity-80 text-white px-4 py-2 rounded-lg transition-colors flex items-center" onclick="openModal('addStudentModal')">
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                </svg>
-                New Student
-            </button>
+         <div class="flex justify-end w-full">
+           <div class="flex items-center gap-3">
+               <div class="bg-primary rounded-lg flex items-center justify-center w-10 h-10">
+                   <span class="text-white font-bold text-lg"><?php echo $_COOKIE['name'][0]; ?></span>
+               </div>
+               <h1 class="text-white text-lg">Hello, <?php echo $_COOKIE['name']; ?></h1>
+           </div>
+       </div>
+        <div class="flex items-center gap-4">
+                <h2 class="text-white text-2xl font-semibold">Students</h2>
+                <button class="bg-primary hover:opacity-80 text-white px-4 py-2 rounded-lg transition-colors flex items-center" onclick="openModal('addStudentModal')">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                    New Student
+                </button>
         </div>
 
         <!-- <div class="py-3">

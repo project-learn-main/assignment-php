@@ -28,6 +28,14 @@ $ordersPage = array_slice($_SESSION['orders'], $offset, $perPage);
 <!-- Header -->
 <div class="h-full ">
     <div class="bg-gray-800 px-6 py-8">
+         <div class="flex justify-end w-full">
+           <div class="flex items-center gap-3">
+               <div class="bg-primary rounded-lg flex items-center justify-center w-10 h-10">
+                   <span class="text-white font-bold text-lg"><?php echo $_COOKIE['name'][0]; ?></span>
+               </div>
+               <h1 class="text-white text-lg">Hello, <?php echo $_COOKIE['name']; ?></h1>
+           </div>
+       </div>
         <h2 class="text-white text-2xl font-semibold">Orders</h2>
         <!-- Filters
         <div class="py-3">

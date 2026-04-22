@@ -58,6 +58,14 @@ $genderLabels = [
 ?>
 
 <div class="p-6">
+    <div class="flex justify-end w-full">
+           <div class="flex items-center gap-3">
+               <div class="bg-primary rounded-lg flex items-center justify-center w-10 h-10">
+                   <span class="text-white font-bold text-lg"><?php echo $_COOKIE['name'][0]; ?></span>
+               </div>
+               <h1 class="text-white text-lg">Hello, <?php echo $_COOKIE['name']; ?></h1>
+           </div>
+       </div>
     <h2 class="text-2xl font-bold text-white mb-6 capitalize">Bảng điều khiển</h2>
     
     <!-- Statistics Cards -->
