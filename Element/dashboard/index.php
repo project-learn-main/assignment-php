@@ -60,8 +60,8 @@ $genderLabels = [
 <div class="p-6">
     <div class="flex justify-end w-full">
            <div class="flex items-center gap-3">
-               <div class="bg-primary rounded-lg flex items-center justify-center w-10 h-10">
-                   <span class="text-white font-bold text-lg"><?php echo $_COOKIE['name'][0]; ?></span>
+               <div class="border-primary border-2 rounded-lg flex items-center justify-center w-12 h-12">
+                   <img src="assets/images/avartar.webp" alt="Avatar" class="w-12 h-12 rounded-full">
                </div>
                <h1 class="text-white text-lg">Hello, <?php echo $_COOKIE['name']; ?></h1>
            </div>
