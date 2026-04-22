@@ -13,11 +13,21 @@ if ($activeTab === 'students' && isset($_GET['page'])) {
     $currentPage = (int)$_GET['page'];
 }
 $perPage = 5;
-$total = count($_SESSION['students']);
+
+// Sort students by ID descending (handle both numeric and string IDs)
+$sortedStudents = $_SESSION['students'];
+usort($sortedStudents, function($a, $b) {
+    // Convert IDs to numeric for comparison
+    $idA = is_numeric($a['id']) ? $a['id'] : (int)preg_replace('/[^0-9]/', '', $a['id']);
+    $idB = is_numeric($b['id']) ? $b['id'] : (int)preg_replace('/[^0-9]/', '', $b['id']);
+    return $idB - $idA;
+});
+
+$total = count($sortedStudents);
 $totalPages = ceil($total / $perPage);
 $page = max(1, min($currentPage, $totalPages));
 $offset = ($currentPage - 1) * $perPage;
-$studentsPage = array_slice($_SESSION['students'], $offset, $perPage);
+$studentsPage = array_slice($sortedStudents, $offset, $perPage);
 ?>
 
 <!-- Header -->
@@ -88,7 +98,7 @@ $studentsPage = array_slice($_SESSION['students'], $offset, $perPage);
                 foreach ($studentsPage as $student) {
                     $rowCount++;
                     echo '<tr class="border-b border-gray-800 hover:bg-gray-800 transition-colors" data-student-id="' . $student['id'] . '">';
-                    echo '<td class="py-3 px-4 font-semibold">' . ($student['studentId'] ?? $student['id']) . '</td>';
+                    echo '<td class="py-3 px-4 font-semibold">' . $student['id'] . '</td>';
                     echo '<td class="py-3 px-4">' . $student['name'] . '</td>';
                     echo '<td class="py-3 px-4">' . $student['email'] . '</td>';
                     echo '<td class="py-3 px-4">' . ($student['phone'] ?? '') . '</td>';

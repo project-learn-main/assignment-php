@@ -18,19 +18,26 @@ if(isset($_POST['name']) && isset($_POST['dateOfBirth']) && isset($_POST['gender
 
     $targetPath = $path . '/' . $picture['name'];
     if (move_uploaded_file($picture['tmp_name'], $targetPath)) {
+        $maxId = 0;
+        foreach ($_SESSION['students'] as $student) {
+            if (is_numeric($student['id']) && $student['id'] > $maxId) {
+                $maxId = $student['id'];
+            }
+        }
+        $newId = $maxId + 1;
+        
         $newStudent = [
-     'id' => count($_SESSION['students']) + 1,
-    'studentId' => 'STU' . str_pad(count($_SESSION['students']) + 1, 3, '0', STR_PAD_LEFT),
-    'name' => $name,
-    'dateOfBirth' => $dateOfBirth,
-    'gender' => $gender,
-    'phone' => $phone,
-    'email' => $email,
-    'address' => $address,
-    'image' => 'images/' . $picture['name'],
-    'status' => 'Đang học'
-];
-        $_SESSION['students'][] = $newStudent;
+            'id' => $newId,
+            'name' => $name,
+            'dateOfBirth' => $dateOfBirth,
+            'gender' => $gender,
+            'phone' => $phone,
+            'email' => $email,
+            'address' => $address,
+            'image' => 'images/' . $picture['name'],
+            'status' => 'Đang học'
+        ];
+        array_unshift($_SESSION['students'], $newStudent);
         setcookie('student_add_success', 'true', time() + 10, "/");
         
         // Debug: Log new student added

@@ -46,18 +46,17 @@ $dataStudents = [
         'studentId' => 'STU004'
     ],
     [
-        'id' => 'STU004',
+        'id' => 5,
         'name' => 'Diana Wilson',
         'email' => 'diana.w@school.edu',
         'phone' => '123-456-7890',
-        'gender' => 'Nữ',
         'gender' => 'Female',
         'address' => '123 Main St, City, State',
         'dateOfBirth' => '1998-05-30',
         'image' => 'images/hinh-nen-dai-ngan-ha-3d-chat_084831164.jpg'
     ],
     [
-        'id' => 'STU005',
+        'id' => 6,
         'name' => 'Eva Brown',
         'email' => 'eva.b@school.edu',
         'phone' => '123-456-7890',
@@ -67,7 +66,7 @@ $dataStudents = [
         'image' => 'images/hinh-nen-dai-ngan-ha-3d-chat_084831164.jpg'
     ],
     [
-        'id' => 'STU006',
+        'id' => 7,
         'name' => 'Frank Miller',
         'email' => 'frank.m@school.edu',
         'phone' => '123-456-7890',
@@ -77,7 +76,7 @@ $dataStudents = [
         'image' => 'images/hinh-nen-dai-ngan-ha-3d-chat_084831164.jpg'
     ],
     [
-        'id' => 'STU007',
+        'id' => 8,
         'name' => 'Grace Lee',
         'email' => 'grace.l@school.edu',
         'phone' => '123-456-7890',
@@ -87,7 +86,7 @@ $dataStudents = [
         'image' => 'images/hinh-nen-dai-ngan-ha-3d-chat_084831164.jpg'
     ],
     [
-        'id' => 'STU008',
+        'id' => 9,
         'name' => 'Henry Taylor',
         'email' => 'henry.t@school.edu',
         'phone' => '123-456-7890',
@@ -97,7 +96,7 @@ $dataStudents = [
         'image' => 'images/hinh-nen-dai-ngan-ha-3d-chat_084831164.jpg'
     ],
     [
-        'id' => 'STU009',
+        'id' => 10,
         'name' => 'Ivy Chen',
         'email' => 'ivy.c@school.edu',
         'phone' => '123-456-7890',
@@ -107,7 +106,7 @@ $dataStudents = [
         'image' => 'images/hinh-nen-dai-ngan-ha-3d-chat_084831164.jpg'
     ],
     [
-        'id' => 'STU010',
+        'id' => 11,
         'name' => 'Jack White',
         'email' => 'jack.w@school.edu',
         'phone' => '123-456-7890',

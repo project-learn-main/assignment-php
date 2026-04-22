@@ -21,11 +21,18 @@
         $currentPage = (int)$_GET['page'];
     }
     $perPage = 5;
-    $total = count($_SESSION['customers']);
+    
+    // Sort customers by ID descending
+    $sortedCustomers = $_SESSION['customers'];
+    usort($sortedCustomers, function($a, $b) {
+        return $b['id'] - $a['id'];
+    });
+    
+    $total = count($sortedCustomers);
     $totalPages = ceil($total / $perPage);
     $page = max(1, min($currentPage, $totalPages));
     $offset = ($currentPage - 1) * $perPage;
-    $customersPage = array_slice($_SESSION['customers'], $offset, $perPage);
+    $customersPage = array_slice($sortedCustomers, $offset, $perPage);
 ?>
 <!-- Header -->
 <div class=" h-full">
