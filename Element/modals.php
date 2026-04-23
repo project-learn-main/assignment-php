@@ -65,18 +65,20 @@
                     <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         id="customerName" name="name" required>
                 </div>
-                <div class="mb-4">
-                    <label for="customerEmail" class="block text-gray-300 font-medium mb-2">Date of Birth</label>
+                <div class="grid grid-cols-2 gap-4 items-center">
+                    <div class="mb-4">
+                    <label for="dateOfBirth" class="block text-gray-300 font-medium mb-2">Date of Birth</label>
                     <input type="date" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        id="customerEmail" name="dateOfBirth" required>
-                </div>
-                <div class="mb-4">
-                    <label for="customerEmail" class="block text-gray-300 font-medium mb-2">Gender</label>
+                        id="dateOfBirth" name="dateOfBirth" required>
+                    </div>
+                    <div class="mb-4">
+                    <label for="gender" class="block text-gray-300 font-medium mb-2">Gender</label>
                     <select class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        id="customerEmail" name="gender" required>
+                        id="gender" name="gender" required>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                     </select>
+                    </div>
                 </div>
                 <div class="mb-4">
                     <label for="customerPhone" class="block text-gray-300 font-medium mb-2">Phone Number</label>
@@ -299,18 +301,20 @@
                     <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         id="studentName" name="name" required>
                 </div>
-                <div class="mb-4">
-                    <label for="studentEmail" class="block text-gray-300 font-medium mb-2">Date of Birth</label>
-                    <input type="date" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        id="studentEmail" name="dateOfBirth" required>
-                </div>
-                <div class="mb-4">
-                    <label for="studentEmail" class="block text-gray-300 font-medium mb-2">Gender</label>
-                    <select class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        id="studentEmail" name="gender" required>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
+                <div class="grid grid-cols-2 gap-4 items-center">
+                    <div class="mb-4">
+                        <label for="dateOfBirth" class="block text-gray-300 font-medium mb-2">Date of Birth</label>
+                        <input type="date" class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            id="dateOfBirth" name="dateOfBirth" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="gender" class="block text-gray-300 font-medium mb-2">Gender</label>
+                        <select class="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            id="gender" name="gender" required>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="mb-4">
                     <label for="studentPhone" class="block text-gray-300 font-medium mb-2">Phone Number</label>
